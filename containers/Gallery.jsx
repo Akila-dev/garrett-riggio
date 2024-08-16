@@ -12,8 +12,10 @@ import { images } from '../utils';
 const Gallery = () => {
 	return (
 		<div className="relative h-[400vh]">
-			<div className="w-full h-[calc(100vh+15px)] no-scrollbar sticky top-0">
-				<GalleryCanvas />
+			<div className="w-full h-screen overflow-hidden no-scrollbar sticky top-0">
+				<div className="w-full h-[calc(100vh+15px)] no-scrollbar">
+					<GalleryCanvas />
+				</div>
 				<div className="h-screen w-full absolute top-0 pointer-events-none flex flex-col justify-between">
 					<div href="#main" className="p-5 md:p-[3rem] text-sm">
 						<Image
