@@ -91,6 +91,7 @@ export default function Footer() {
 				style={{
 					perspective: '500px',
 					transformStyle: 'preserve-3d',
+					perspectiveOrigin: 'bottom bottom',
 				}}
 			>
 				{galleryList.map((src, i) => (
@@ -107,12 +108,12 @@ export default function Footer() {
 								.map((n, i) => (
 									<div
 										key={i}
-										className="w-[40vh] h-[30vh] lg:w-[30vw] lg:h-[20vw] overflow-hidden col-span-1 row-span-1"
+										className="w-w-[50vh] h-[35vh] lg:w-[30vw] lg:h-[20vw] overflow-hidden col-span-1 row-span-1"
 									/>
 								))}
 						{/* <div className="w-[30vw] h-[20vw] overflow-hidden col-span-1 row-span-1" /> */}
 						<motion.div
-							className={`w-[60vh] h-[40vh] lg:w-[30vw] lg:h-[20vw] overflow-hidden col-span-1 row-span-1`}
+							className={`w-[50vh] h-[35vh] lg:w-[30vw] lg:h-[20vw] overflow-hidden col-span-1 row-span-1`}
 						>
 							<RectangleCard src={src} />
 						</motion.div>
