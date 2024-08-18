@@ -39,7 +39,7 @@ export default function Footer() {
 		let rep = Math.ceil(galleryList.length / fill.length);
 		for (let i = 0; i < rep; i++) {
 			for (let j = 0; j < fill.length; j++) {
-				setY((prev) => [...prev, fill[j] > 5 ? '25vh' : '-25vh']);
+				setY((prev) => [...prev, fill[j] > 5 ? '50vh' : '-50vh']);
 				setX((prev) => [
 					...prev,
 					[0, 6].includes(fill[j])
@@ -113,6 +113,7 @@ export default function Footer() {
 								))}
 						{/* <div className="w-[30vw] h-[20vw] overflow-hidden col-span-1 row-span-1" /> */}
 						<motion.div
+							// whileInView={{ scale: [0, 1] }}
 							className={`w-[50vh] h-[35vh] lg:w-[30vw] lg:h-[20vw] overflow-hidden col-span-1 row-span-1`}
 						>
 							<RectangleCard src={src} />
