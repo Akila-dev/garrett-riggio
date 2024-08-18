@@ -57,7 +57,7 @@ export default function Footer() {
 	const footerVariants = {
 		initial: (i) => ({
 			// opacity: 1,
-			// z: '100px',
+			// z: '-100px',
 			x: 0,
 			y: 0,
 			opacity: 0,
@@ -99,7 +99,7 @@ export default function Footer() {
 						key={i}
 						variants={footerVariants}
 						custom={i}
-						className="grid grid-cols-3 grid-rows-3 w-full h-screen opacity-0 justify-center items-center absolute"
+						className="grid grid-cols-3 grid-rows-3 w-full h-screen opacity-0 justify-center items-center absolute gap-5"
 						layout
 					>
 						{fillers[i] > 0 &&
@@ -114,7 +114,7 @@ export default function Footer() {
 						{/* <div className="w-[30vw] h-[20vw] overflow-hidden col-span-1 row-span-1" /> */}
 						<motion.div
 							// whileInView={{ scale: [0, 1] }}
-							className={`w-[50vh] h-[35vh] lg:w-[30vw] lg:h-[20vw] overflow-hidden col-span-1 row-span-1`}
+							className={`w-[50vh] h-[35vh] lg:w-[30vw] lg:h-[20vw] overflow-hidden col-span-1 row-span-1 translate-x-[-35%]`}
 						>
 							<RectangleCard src={src} />
 						</motion.div>
