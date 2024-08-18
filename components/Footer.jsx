@@ -39,13 +39,13 @@ export default function Footer() {
 		let rep = Math.ceil(galleryList.length / fill.length);
 		for (let i = 0; i < rep; i++) {
 			for (let j = 0; j < fill.length; j++) {
-				setY((prev) => [...prev, fill[j] > 5 ? '50vh' : '-50vh']);
+				setY((prev) => [...prev, fill[j] > 5 ? '10vh' : '-10vh']);
 				setX((prev) => [
 					...prev,
 					[0, 6].includes(fill[j])
-						? '-50vh'
+						? '-25vw'
 						: [2, 8].includes(fill[j])
-						? '50vh'
+						? '25vw'
 						: 0,
 				]);
 				res.push(fill[j]);
@@ -62,21 +62,21 @@ export default function Footer() {
 			y: 0,
 			opacity: 0,
 			scale: 0.5,
-			z: '-100px',
+			z: '0',
 		}),
 		animate: (i) => ({
 			x: [0, x[i]],
 			y: [0, y[i]],
 			opacity: [0, 1, 1],
 			scale: [0.5, 1],
-			z: ['-100px', '1000px'],
+			z: ['0', '1000px'],
 			transition: {
 				type: 'tween',
 				times: [0, 0.3, 1],
-				duration: 15,
+				duration: 17 + (3 * Math.sin(i)) / 2,
 				ease: 'easeIn',
 				repeat: Infinity,
-				repeatDelay: galleryList.length - 15, //galleryList * (duration*staggerChildren)
+				repeatDelay: galleryList.length - 17 + (3 * Math.sin(i)) / 2, //galleryList * (duration*staggerChildren)
 			},
 		}),
 	};
@@ -114,7 +114,7 @@ export default function Footer() {
 						{/* <div className="w-[30vw] h-[20vw] overflow-hidden col-span-1 row-span-1" /> */}
 						<motion.div
 							// whileInView={{ scale: [0, 1] }}
-							className={`w-[50vh] h-[35vh] lg:w-[30vw] lg:h-[20vw] overflow-hidden col-span-1 row-span-1 translate-x-[-35%]`}
+							className={`w-[50vh] h-[35vh] lg:w-[30vw] lg:h-[20vw] overflow-hidden col-span-1 row-span-1 translate-x-[-35%] lg:translate-x-[15%] scale-75 lg:scale-[0.9]`}
 						>
 							<RectangleCard src={src} />
 						</motion.div>
