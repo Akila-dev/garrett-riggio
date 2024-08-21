@@ -85,8 +85,8 @@ export default function Footer() {
 
 	useEffect(() => {
 		const staggerScreen = (e) => {
-			setAnimateX((window.innerWidth / 4 - e.screenX) / 15);
-			setAnimateY((window.innerHeight / 4 - e.screenY) / 15);
+			setAnimateX((window.innerWidth / 4 - e.screenX) / 12.5);
+			setAnimateY((window.innerHeight / 4 - e.screenY) / 12.5);
 			console.log(e);
 		};
 
