@@ -13,6 +13,14 @@
 	--neutral: #585b53;
 }
 
+.cover-container {
+	@apply w-full h-screen;
+	background: radial-gradient(var(--neutral), var(--black) 80%);
+}
+.outline-text {
+	-webkit-text-stroke: 1px white;
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -22,7 +30,7 @@
 }
 
 body {
-	@apply h-full w-full bg-[--white] text-[--white] scroll-smooth;
+	@apply h-full w-full bg-[--black] text-[--white] scroll-smooth;
 }
 
 a {
@@ -163,4 +171,8 @@ h1 {
 			-1.8em 1.8em 0 0em rgba(255, 255, 255, 0.5),
 			-2.6em 0em 0 0em rgba(255, 255, 255, 0.7), -1.8em -1.8em 0 0em #ffffff;
 	}
+}
+
+.outline-text {
+	-webkit-text-stroke: 1px white;
 }

@@ -1,8 +1,8 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import Image from 'next/image';
-import { Gallery } from '../containers';
+import { Cover } from '../containers';
 import {
 	motion,
 	useTransform,
@@ -14,6 +14,7 @@ import {
 // import { SmoothScroll } from '../wrappers';
 import { images } from '../utils';
 import { galleryList } from '../utils/galleryData';
+import { Loader } from '../components';
 
 export default function Home() {
 	const container = useRef();
@@ -29,15 +30,35 @@ export default function Home() {
 	const springClipProgress = useSpring(clipProgress, { damping: 18 });
 	const clip = useMotionTemplate`inset(0 ${springClipProgress}% 0 ${springClipProgress}%)`;
 
+	const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+	const trackMouse = (e) => {
+		setMousePos({
+			x: e.clientX - 50,
+			y: e.clientY - 50,
+		});
+		console.log(mousePos);
+	};
+
 	return (
-		<main className="" ref={container}>
-			<div className="fixed w-full top-0">
-				<Gallery />
-			</div>
-			<motion.div
-				style={{ clipPath: clip }}
-				className="relative h-[500vh] bg-black"
-			></motion.div>
+		<main className="w-full" ref={container}>
+			{/* <div className="cover-container">
+				<Cover />
+			</div> */}
+			{/* <div
+				className="h-[80vh] w-[80vw] bg-red-700"
+				onMouseMove={(e) => trackMouse(e)}
+			>
+				<motion.div
+					animate={{ x: mousePos.x, y: mousePos.y }}
+					transition={{ type: 'spring', duration: 0.5 }}
+					className="bg-white p-5 flex-center rounded-full w-[100px] h-[100px] text-black"
+				>
+					{'x: ' + mousePos.x}
+					<br />
+					{'y: ' + mousePos.y}
+				</motion.div>
+			</div> */}
 		</main>
 	);
 }

@@ -13,7 +13,7 @@ import {
 
 // import { SmoothScroll } from '../wrappers';
 import { images } from '../utils';
-import { galleryList } from '../utils/galleryData'; // This is just a list of the images that would be used
+import { galleryListFooter } from '../utils/galleryData'; // This is just a list of the images that would be used
 const RectangleCard = ({ src }) => {
 	return (
 		<motion.div className="w-full h-full relative">
@@ -30,13 +30,15 @@ const RectangleCard = ({ src }) => {
 
 export default function Footer() {
 	const [initSpeed, setInitSpeed] = useState(true);
+	const [animateX, setAnimateX] = useState(0);
+	const [animateY, setAnimateY] = useState(0);
 
 	const fill = [0, 8, 1, 6, 2, 7];
 	const [y, setY] = useState([]);
 	const [x, setX] = useState([]);
 	const [fillers, setFillers] = useState(() => {
 		let res = [];
-		let rep = Math.ceil(galleryList.length / fill.length);
+		let rep = Math.ceil(galleryListFooter.length / fill.length);
 		for (let i = 0; i < rep; i++) {
 			for (let j = 0; j < fill.length; j++) {
 				setY((prev) => [...prev, fill[j] > 5 ? '10vh' : '-10vh']);
@@ -73,54 +75,79 @@ export default function Footer() {
 			transition: {
 				type: 'tween',
 				times: [0, 0.3, 1],
-				duration: 17 + (3 * Math.sin(i)) / 2,
+				duration: 17,
 				ease: 'easeIn',
 				repeat: Infinity,
-				repeatDelay: galleryList.length - 17 + (3 * Math.sin(i)) / 2, //galleryList * (duration*staggerChildren)
+				repeatDelay: galleryListFooter.length - 17, //galleryListFooter * (duration*staggerChildren)
 			},
 		}),
 	};
 
+	useEffect(() => {
+		const staggerScreen = (e) => {
+			setAnimateX((window.innerWidth / 4 - e.screenX) / 15);
+			setAnimateY((window.innerHeight / 4 - e.screenY) / 15);
+			console.log(e);
+		};
+
+		window.addEventListener('mousemove', staggerScreen);
+
+		return () => window.removeEventListener('mousemove', staggerScreen);
+	}, []);
+
 	return (
-		<main className="bg-black h-screen w-full overflow-hidden" style={{}}>
-			<motion.div
-				initial="initial"
-				animate="animate"
-				transition={{ staggerChildren: 1 }}
-				className="w-full h-full flex items-center justify-center"
-				style={{
-					perspective: '500px',
-					transformStyle: 'preserve-3d',
-					perspectiveOrigin: 'bottom bottom',
+		<motion.main
+			className="bg-black h-screen w-full overflow-hidden"
+			// onMouseMove={(e) => staggerScreen(e)}
+		>
+			<motion.main
+				animate={{ x: animateX, y: animateY }}
+				transition={{
+					type: 'tween',
+					duration: 1,
+					ease: 'easeOut',
 				}}
+				className="h-screen w-full relative"
 			>
-				{galleryList.map((src, i) => (
-					<motion.div
-						key={i}
-						variants={footerVariants}
-						custom={i}
-						className="grid grid-cols-3 grid-rows-3 w-full h-screen opacity-0 justify-center items-center absolute gap-5"
-						layout
-					>
-						{fillers[i] > 0 &&
-							Array(fillers[i])
-								.fill(0)
-								.map((n, i) => (
-									<div
-										key={i}
-										className="w-w-[50vh] h-[35vh] lg:w-[30vw] lg:h-[20vw] overflow-hidden col-span-1 row-span-1"
-									/>
-								))}
-						{/* <div className="w-[30vw] h-[20vw] overflow-hidden col-span-1 row-span-1" /> */}
+				<motion.div
+					initial="initial"
+					animate="animate"
+					transition={{ staggerChildren: 1 }}
+					className="w-full h-full flex items-center justify-center relative"
+					style={{
+						perspective: '500px',
+						transformStyle: 'preserve-3d',
+						perspectiveOrigin: 'center center',
+					}}
+				>
+					{galleryListFooter.map((src, i) => (
 						<motion.div
-							// whileInView={{ scale: [0, 1] }}
-							className={`w-[50vh] h-[35vh] lg:w-[30vw] lg:h-[20vw] overflow-hidden col-span-1 row-span-1 translate-x-[-35%] lg:translate-x-[15%] scale-75 lg:scale-[0.9]`}
+							key={i}
+							variants={footerVariants}
+							custom={i}
+							className="grid grid-cols-3 grid-rows-3 h-screen opacity-0 justify-center items-center absolute gap-5 w-[150vw] md:w-screen"
+							layout
 						>
-							<RectangleCard src={src} />
+							{fillers[i] > 0 &&
+								Array(fillers[i])
+									.fill(0)
+									.map((n, i) => (
+										<div
+											key={i}
+											className="w-[50vh] h-[35vh] lg:w-[30vw] lg:h-[20vw] overflow-hidden col-span-1 row-span-1"
+										/>
+									))}
+							{/* <div className="w-[30vw] h-[20vw] overflow-hidden col-span-1 row-span-1" /> */}
+							<motion.div
+								// whileInView={{ scale: [0, 1] }}
+								className={`w-[50vh] h-[35vh] lg:w-[30vw] lg:h-[20vw] overflow-hidden col-span-1 row-span-1 translate-x-[-35%] lg:translate-x-[15%] scale-75 lg:scale-[0.9]`}
+							>
+								<RectangleCard src={src} />
+							</motion.div>
 						</motion.div>
-					</motion.div>
-				))}
-			</motion.div>
-		</main>
+					))}
+				</motion.div>
+			</motion.main>
+		</motion.main>
 	);
 }

@@ -22,7 +22,7 @@ import img20 from '../assets/imgs/20.jpeg';
 import img21 from '../assets/imgs/21.jpeg';
 import img22 from '../assets/imgs/22.jpeg';
 
-import garret from '../assets/imgs/garret-logo.png';
+import garret from '../assets/imgs/garret.png';
 import arrow from '../assets/imgs/arrow-b.png';
 
 export default {
