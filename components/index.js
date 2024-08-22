@@ -1,4 +1,6 @@
 export { default as Navbar } from './Navbar';
+export { default as ZoomingCardsBG } from './ZoomingCardsBG';
+
 export { default as MenuPopup } from './MenuPopup';
 export { default as CloseBtn } from './CloseBtn';
 export { default as Loader } from './Loader';
