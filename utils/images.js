@@ -22,7 +22,8 @@ import img20 from '../assets/imgs/20.jpeg';
 import img21 from '../assets/imgs/21.jpeg';
 import img22 from '../assets/imgs/22.jpeg';
 
-import garret from '../assets/imgs/garret.png';
+import garretWhite from '../assets/imgs/garret.png';
+import garretBlack from '../assets/imgs/garret-logo.png';
 import arrow from '../assets/imgs/arrow-b.png';
 
 export default {
@@ -48,6 +49,7 @@ export default {
 	img20,
 	img21,
 	img22,
-	garret,
+	garretWhite,
+	garretBlack,
 	arrow,
 };

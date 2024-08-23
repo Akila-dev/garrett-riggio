@@ -1,3 +1,4 @@
 import images from './images';
+import variants from './variants';
 
-export { images };
+export { images, variants };

@@ -1,26 +1,26 @@
 export const FOOTERLINKLIST = [
 	{
 		link: 'career',
-		label: 'career',
+		label: 'Facebook',
 	},
 	{
 		link: 'contact',
-		label: 'contact',
+		label: 'Twitter',
 	},
 	{
 		link: 'faq',
-		label: 'FAQ',
+		label: 'Instagram',
 	},
 	{
-		link: 'privacy',
-		label: 'Privacy Policy',
+		link: 'mailto:garrettriggio1234@gmail.com',
+		label: 'Email',
 	},
 	{
-		link: 'atelier',
-		label: 'Atelier Program',
+		link: 'tel:+1234567891011',
+		label: '+1234567891011',
 	},
 	{
 		link: 'terms',
-		label: 'Terms & Conditions',
+		label: 'Palo Alto, California, United States',
 	},
 ];
