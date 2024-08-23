@@ -19,8 +19,19 @@ const textList = [
 	'Philantropist',
 ];
 
-const Cover = () => {
-	const [activeText, setActiveText] = useState(2);
+const Cover = ({ scrollYProgress }) => {
+	const [activeText, setActiveText] = useState(3);
+	// const { scrollY } = useScroll();
+
+	// const translateTop = useTransform(
+	// 	scrollY,
+	// 	[0, window.innerHeight],
+	// 	[0, -window.innerHeight / 2]
+	// );
+	// const springTranslateTop = useSpring(translateTop, { damping: 18 });
+
+	// const translateBottom = useTransform(scrollY, [0, 200], [0, '50vh']);
+	// const springTranslateBottom = useSpring(translateBottom, { damping: 18 });
 
 	return (
 		<div className="w-full h-screen relative">
@@ -32,10 +43,10 @@ const Cover = () => {
 				initial="initial"
 				animate="intro"
 				transition={{ duration: 0, staggerChildren: 0.15 }}
-				className="absolute top-0 left-0 w-full h-screen p-5 md:p-10 radial-gradient !pt-[120px] flex flex-col justify-between"
+				className="absolute top-0 left-0 w-full h-screen p-5 md:p-7 !pb-[120px] radial-gradien flex flex-col justify-end"
 			>
 				{/* MOBILE  */}
-				<div className="lg:hidden">
+				<motion.div className="lg:hidden">
 					<motion.h1
 						className="cover-text"
 						variants={variants.TEXT_VARIANT_1}
@@ -65,20 +76,20 @@ const Cover = () => {
 					>
 						<motion.div className="">And Smile Creator</motion.div>
 					</motion.h1>
-				</div>
+				</motion.div>
 				{/* DESKTOP */}
-				<div className="hidden lg:block">
+				<motion.div layout className="relative hidden lg:block">
 					<motion.h1
 						className="cover-text"
 						variants={variants.TEXT_VARIANT_1}
-						custom={'6vw'}
+						custom={'5vw'}
 					>
 						<motion.div className="">Award Winning</motion.div>
 					</motion.h1>
 					<motion.h1
 						className="cover-text"
 						variants={variants.TEXT_VARIANT_1}
-						custom={'6vw'}
+						custom={'5vw'}
 					>
 						<motion.div className="">
 							{textList.map((text, i) => (
@@ -93,11 +104,11 @@ const Cover = () => {
 					<motion.h1
 						className="cover-text"
 						variants={variants.TEXT_VARIANT_1}
-						custom={'6vw'}
+						custom={'5vw'}
 					>
 						<motion.div className="">And Smile Creator</motion.div>
 					</motion.h1>
-				</div>
+				</motion.div>
 			</motion.div>
 		</div>
 	);

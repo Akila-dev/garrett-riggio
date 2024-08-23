@@ -6,7 +6,7 @@ import { useAnimate, motion } from 'framer-motion';
 
 import { RiCloseLargeLine } from 'react-icons/ri';
 
-const CloseBtn = ({ onClick, right }) => {
+const CloseBtn = ({ onClick, right, darken }) => {
 	const [isShowMenu, setIsShowMenu] = useState(false);
 	const [scope, animate] = useAnimate();
 
@@ -18,7 +18,7 @@ const CloseBtn = ({ onClick, right }) => {
 		);
 		animate(
 			scope.current,
-			{ scale: [1, 1.1], color: ['var(--black)', 'var(--brand2)'] },
+			{ scale: [1, 1.1] },
 			{ duration: 0.5, ease: 'circOut' }
 		);
 	};
@@ -31,7 +31,7 @@ const CloseBtn = ({ onClick, right }) => {
 		);
 		animate(
 			scope.current,
-			{ scale: [1.1, 1], color: ['var(--brand2)', 'var(--black)'] },
+			{ scale: [1.1, 1] },
 			{ duration: 0.5, ease: 'circOut' }
 		);
 	};
@@ -47,7 +47,9 @@ const CloseBtn = ({ onClick, right }) => {
 				onClick={onClick}
 				onMouseEnter={() => spinIn()}
 				onMouseLeave={() => spinOut()}
-				className="flex gap-2 items-center font-medium text-[--black]"
+				className={`flex gap-2 items-center font-medium ${
+					darken ? 'text-[--white]' : 'text-[--black]'
+				} hover:text-[--brand2]`}
 				layout
 			>
 				<RiCloseLargeLine className="!text-xl menu-icon" />

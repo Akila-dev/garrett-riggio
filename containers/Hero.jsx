@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import {
 	motion,
@@ -14,18 +14,24 @@ import { Cover } from '../containers';
 // import { SmoothScroll } from '../wrappers';
 
 const Hero = () => {
-	const { scrollY } = useScroll();
+	// const { scrollY } = useScroll();
+	const scrollContainer = useRef();
+	const { scrollYProgress } = useScroll({
+		target: scrollContainer,
+		offset: ['start start', 'end end'],
+		layoutEffect: false,
+	});
 
-	const clipProgress = useTransform(scrollY, [0, 400], [50, 0]);
+	const clipProgress = useTransform(scrollYProgress, [0, 0.25], [50, 0]);
 	const springClipProgress = useSpring(clipProgress, { damping: 18 });
-	const clip = useMotionTemplate`inset(0 ${springClipProgress}% 0 ${springClipProgress}%)`;
+	const clip = useMotionTemplate`inset(${springClipProgress}% 0 ${springClipProgress}% 0)`;
 
 	// const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
 	return (
-		<div className="h-[400vh] w-full relative">
+		<div ref={scrollContainer} className="h-[400vh] w-full relative">
 			<div className="fixed top-0 left-0 w-full h-screen">
-				<Cover />
+				<Cover scrollYProgress={scrollYProgress} />
 			</div>
 			<motion.div
 				style={{ clipPath: clip }}

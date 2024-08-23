@@ -11,6 +11,7 @@ import { Logo, MenuPopup } from '../components';
 const Navbar = () => {
 	const [isShowMenu, setIsShowMenu] = useState(false);
 	const [scope, animate] = useAnimate();
+	const [showNavbar, setShowNavbar] = useState(true);
 
 	const animateMenuLines = () => {
 		animate('.menu-lines', { width: [0, 20] }, { delay: stagger(0.1) });
@@ -42,10 +43,30 @@ const Navbar = () => {
 		);
 	};
 
+	// useEffect(() => {
+	// 	const handleScroll = () => {
+	// 		const scrollTop = window.scrollY;
+	// 		const screenHeight = window.innerHeight;
+	// 		if (scrollTop >= screenHeight / 1.65) {
+	// 			setShowNavbar(true);
+	// 		} else {
+	// 			setShowNavbar(false);
+	// 		}
+	// 	};
+
+	// 	window.addEventListener('scroll', handleScroll);
+
+	// 	return () => window.removeEventListener('scroll', handleScroll);
+	// }, []);
+
 	return (
 		<>
 			<div className="w-full fixed top-0 left-0" ref={scope}>
-				<div className="container flex items-center justify-between gap-[10vw] h-[120px]">
+				<motion.div
+					className={`navbar-container container flex items-center justify-between gap-[10vw] overflow-hidden transition-all duration-500 h-[120px] ${
+						showNavbar ? ' opacity-1' : 'opacity-0'
+					}`}
+				>
 					<div className="">
 						<Logo />
 					</div>
@@ -84,7 +105,7 @@ const Navbar = () => {
 							</div>
 						</motion.button>
 					</motion.div>
-				</div>
+				</motion.div>
 			</div>
 			<AnimatePresence>
 				{isShowMenu && <MenuPopup close={() => setIsShowMenu(false)} />}

@@ -20,6 +20,23 @@ import { CloseBtn } from '../components';
 const MenuPopup = ({ close }) => {
 	const [isPresent, safeToRemove] = usePresence();
 	const [scope, animate] = useAnimate();
+	const [darken, setDarken] = useState(false);
+
+	// useEffect(() => {
+	// 	const handleScroll = () => {
+	// 		const scrollTop = window.scrollY;
+	// 		const screenHeight = window.innerHeight;
+	// 		if (scrollTop <= screenHeight / 2) {
+	// 			setDarken(true);
+	// 		} else {
+	// 			setDarken(false);
+	// 		}
+	// 	};
+
+	// 	window.addEventListener('scroll', handleScroll);
+
+	// 	return () => window.removeEventListener('scroll', handleScroll);
+	// }, []);
 
 	useEffect(() => {
 		if (isPresent) {
@@ -83,9 +100,13 @@ const MenuPopup = ({ close }) => {
 			ref={scope}
 			className="fixed top-0 right-0 w-full sm:max-w-[375px] !z-[100] h-full overflow-hidden "
 		>
-			<motion.div className="bg-[--white] text-[--bg] w-full h-full overflow-y-auto flex flex-col lg:gap-10 justify-between text-xs overflow-hidden">
+			<motion.div
+				className={`${
+					darken ? 'bg-[--black]' : 'bg-[--white]'
+				} transition-color duration-500 text-[--bg] w-full h-full overflow-y-auto flex flex-col lg:gap-10 justify-between text-xs overflow-hidden`}
+			>
 				<div className="px-5 md:px-[2rem] ">
-					<CloseBtn onClick={() => close()} />
+					<CloseBtn onClick={() => close()} darken={darken} />
 				</div>
 
 				<div className="w-full px-5 md:px-[2rem] pb-[5vh] md:pb-0">
@@ -100,7 +121,9 @@ const MenuPopup = ({ close }) => {
 								<Link
 									key={id}
 									href={'/' + item.link}
-									className="block uppercase text-2xl link text-[--black] font-thin menu-link hover:text-[--brand2]"
+									className={`block uppercase text-2xl link ${
+										darken ? 'text-[--white]' : 'text-[--black]'
+									} font-thin menu-link hover:text-[--brand2]`}
 								>
 									{item.link}
 								</Link>
@@ -120,7 +143,9 @@ const MenuPopup = ({ close }) => {
 								<Link
 									key={id}
 									href={'/' + link.link}
-									className="block capitalize text-base link text-[--black] font-thin menu-link hover:text-[--brand2]"
+									className={`block capitalize text-base link ${
+										darken ? 'text-[--white]' : 'text-[--black]'
+									} font-thin menu-link hover:text-[--brand2]`}
 								>
 									{link.label}
 								</Link>
@@ -138,7 +163,9 @@ const MenuPopup = ({ close }) => {
 								<Link
 									key={id}
 									href={'/' + link.link}
-									className="block capitalize text-base link text-[--black] font-thin menu-link hover:text-[--brand2]"
+									className={`block capitalize text-base link ${
+										darken ? 'text-[--white]' : 'text-[--black]'
+									}  font-thin menu-link hover:text-[--brand2]`}
 								>
 									{contactIcons[id]} {link.label}
 								</Link>

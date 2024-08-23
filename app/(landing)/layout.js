@@ -9,7 +9,9 @@ export default function RootLayout({ children }) {
 	return (
 		<div>
 			{children}
-			<Navbar />
+			<div className="z-[-100]">
+				<Navbar />
+			</div>
 		</div>
 	);
 }
