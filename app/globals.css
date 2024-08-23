@@ -106,9 +106,9 @@ h2 {
 .radial-gradient {
 	background: radial-gradient(
 		circle at 50% 50%,
-		#00000016 0%,
-		#000000ab 50%,
-		#000000f2 100%
+		#00000036 0%,
+		#000000cb 50%,
+		#000000fb 100%
 	);
 }
 
