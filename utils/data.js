@@ -13,14 +13,14 @@ export const FOOTERLINKLIST = [
 	},
 	{
 		link: 'mailto:garrettriggio1234@gmail.com',
-		label: 'Email',
+		label: 'Email Me',
 	},
 	{
 		link: 'tel:+1234567891011',
-		label: '+1234567891011',
+		label: 'Call Me',
 	},
 	{
-		link: 'terms',
-		label: 'Palo Alto, California, United States',
+		link: 'Palo Alto, California, United States',
+		label: 'Location',
 	},
 ];

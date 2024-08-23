@@ -80,7 +80,7 @@ h2 {
 
 /* !Hero */
 .cover-text {
-	@apply bg-[--white] bg-clip-text text-transparent mix-blend-difference !font-normal text-[12vw] md:text-[4.5vw] overflow-hidden;
+	@apply bg-[--white] bg-clip-text text-transparent mix-blend-difference !font-normal text-[8.15vw] md:text-[4.5vw] !leading-[100%] overflow-hidden;
 }
 
 .blend-text {

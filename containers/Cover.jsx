@@ -1,5 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 import {
 	motion,
 	useTransform,
@@ -9,7 +11,9 @@ import {
 	AnimatePresence,
 } from 'framer-motion';
 
-import { variants, useDeviceSize } from '../utils';
+import { FaArrowDown } from 'react-icons/fa6';
+
+import { variants, useDeviceSize, images } from '../utils';
 const coverVideoUrl = '/videos/cover.mp4';
 const textList = [
 	'Marketing Specialist',
@@ -43,21 +47,21 @@ const Cover = ({ scrollYProgress }) => {
 				initial="initial"
 				animate="intro"
 				transition={{ duration: 0, staggerChildren: 0.15 }}
-				className="absolute top-0 left-0 w-full h-screen p-5 md:p-7 !pb-[120px] radial-gradien flex flex-col justify-end"
+				className="absolute top-0 left-0 w-full h-screen p-5 md:p-7 !pt-[120px] radial-gradien flex flex-col justify-between"
 			>
 				{/* MOBILE  */}
-				<motion.div className="lg:hidden">
+				<motion.div className="lg:hidden pointer-events-none">
 					<motion.h1
 						className="cover-text"
 						variants={variants.TEXT_VARIANT_1}
-						custom={'15.5vw'}
+						custom={'9vw'}
 					>
 						<motion.div className="">Award Winning</motion.div>
 					</motion.h1>
 					<motion.h1
 						className="cover-text"
 						variants={variants.TEXT_VARIANT_1}
-						custom={'15.5vw'}
+						custom={'9vw'}
 					>
 						<motion.div className="">
 							{textList.map((text, i) => (
@@ -72,24 +76,27 @@ const Cover = ({ scrollYProgress }) => {
 					<motion.h1
 						className="cover-text"
 						variants={variants.TEXT_VARIANT_1}
-						custom={'15.5vw'}
+						custom={'9vw'}
 					>
 						<motion.div className="">And Smile Creator</motion.div>
 					</motion.h1>
 				</motion.div>
 				{/* DESKTOP */}
-				<motion.div layout className="relative hidden lg:block">
+				<motion.div
+					layout
+					className="relative hidden lg:block pointer-events-none"
+				>
 					<motion.h1
 						className="cover-text"
 						variants={variants.TEXT_VARIANT_1}
-						custom={'5vw'}
+						custom={'4.75vw'}
 					>
 						<motion.div className="">Award Winning</motion.div>
 					</motion.h1>
 					<motion.h1
 						className="cover-text"
 						variants={variants.TEXT_VARIANT_1}
-						custom={'5vw'}
+						custom={'4.75vw'}
 					>
 						<motion.div className="">
 							{textList.map((text, i) => (
@@ -104,11 +111,54 @@ const Cover = ({ scrollYProgress }) => {
 					<motion.h1
 						className="cover-text"
 						variants={variants.TEXT_VARIANT_1}
-						custom={'5vw'}
+						custom={'4.75vw'}
 					>
 						<motion.div className="">And Smile Creator</motion.div>
 					</motion.h1>
 				</motion.div>
+
+				<motion.h1 className="absolute bottom-[50px] lg:top-[120px] lg:bottom-0 right-0 blend-text text-[20vw] lg:text-[15vw] [writing-mode:vertical-lr] uppercase hidden lg:block">
+					Garrett
+				</motion.h1>
+
+				{/* AWARDS */}
+				<div className="flex gap-4 justify-between items-end ">
+					<Link
+						href="/red-road-foundation"
+						className="hidden lg:flex flex-col gap-3"
+					>
+						<motion.div>
+							<Image
+								src={images.growthAward}
+								width={500}
+								height={500}
+								className="w-[165px] h-[115px] object-cover"
+							/>
+						</motion.div>
+						<motion.p className="blend-text block">
+							THE RED ROAD FOUNDATION
+						</motion.p>
+					</Link>
+					<div className="lg:hidden" />
+					<div className="flex-center flex-col gap-2">
+						<p className="text-[--white]">SCROLL FOR MORE</p>
+						<motion.div className="bg-[--white] w-[40px] h-[40px] rounded-full flex-center">
+							<motion.span
+								animate={{ y: [-10, 0] }}
+								transition={{
+									type: 'spring',
+									bounce: 0.75,
+									duration: 1.5,
+									repeat: Infinity,
+									repeatDelay: 1,
+								}}
+							>
+								<FaArrowDown className="text-[--black]" />
+							</motion.span>
+						</motion.div>
+					</div>
+					<div className="lg:w-[165px]"></div>
+				</div>
 			</motion.div>
 		</div>
 	);

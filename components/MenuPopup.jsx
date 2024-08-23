@@ -44,7 +44,7 @@ const MenuPopup = ({ close }) => {
 				animate(
 					scope.current,
 					{ width: [0, '100%'] },
-					{ type: 'spring', duration: 1, bounce: 0.1 }
+					{ type: 'spring', bounce: 0.1 }
 				);
 				await animate(
 					'.menu-link',
@@ -53,7 +53,7 @@ const MenuPopup = ({ close }) => {
 						x: [50, 0],
 						y: [50, 0],
 					},
-					{ delay: stagger(0.1), type: 'spring', duration: 0.8, bounce: 0.3 }
+					{ delay: stagger(0.2), type: 'spring', duration: 0.8, bounce: 0.3 }
 				);
 			};
 			enterAnimation();

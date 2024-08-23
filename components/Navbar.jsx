@@ -63,7 +63,7 @@ const Navbar = () => {
 		<>
 			<div className="w-full fixed top-0 left-0" ref={scope}>
 				<motion.div
-					className={`navbar-container container flex items-center justify-between gap-[10vw] overflow-hidden transition-all duration-500 h-[120px] ${
+					className={`navbar-container container flex items-center justify-between gap-[10vw] overflow-hidden transition-all duration-500 h-[80px] lg:h-[120px] ${
 						showNavbar ? ' opacity-1' : 'opacity-0'
 					}`}
 				>

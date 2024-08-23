@@ -26,6 +26,10 @@ import garretWhite from '../assets/imgs/garret.png';
 import garretBlack from '../assets/imgs/garret-logo.png';
 import arrow from '../assets/imgs/arrow-b.png';
 
+import growthAward from '../assets/imgs/awards/growth-award.jpg';
+
+import redRoad from '../assets/imgs/projects/red-road.jpg';
+
 export default {
 	img1,
 	img2,
@@ -52,4 +56,6 @@ export default {
 	garretWhite,
 	garretBlack,
 	arrow,
+	growthAward,
+	redRoad,
 };
