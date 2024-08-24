@@ -87,6 +87,10 @@ h2 {
 	@apply !bg-[--white] !bg-clip-text !text-transparent mix-blend-difference;
 }
 
+.blend-img img {
+	@apply mix-blend-difference;
+}
+
 .flow-text {
 	@apply bg-[--white] bg-clip-text text-transparent mix-blend-difference font-medium text-[12vw] md:text-[4.95vw] overflow-hidden;
 }
@@ -103,14 +107,28 @@ h2 {
 	@apply text-[10vw] lg:text-[4vw] font-light;
 }
 
-.radial-gradient {
+.cover-overlay {
+	width: 100%;
+	height: 100%;
+
+	filter: contrast(100%) brightness(10%);
 	background: radial-gradient(
 		circle at 50% 50%,
-		#00000036 0%,
-		#000000cb 50%,
+		#00000000 0%,
+		#0000000f 50%,
 		#000000fb 100%
 	);
+	/* url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); */
 }
+
+/* .radial-gradient {
+	background: radial-gradient(
+		circle at 50% 50%,
+		#00000000 0%,
+		#0000000b 50%,
+		#000000fb 100%
+	);
+} */
 
 /* !CSS */
 /* Hide scrollbar for Chrome, Safari and Opera */

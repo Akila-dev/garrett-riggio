@@ -1,6 +1,7 @@
 export { default as Navbar } from './Navbar';
 export { default as Logo } from './Logo';
 export { default as MenuPopup } from './MenuPopup';
+export { default as ScrambleText } from './ScrambleText';
 export { default as ZoomingCardsBG } from './ZoomingCardsBG';
 
 export { default as CloseBtn } from './CloseBtn';

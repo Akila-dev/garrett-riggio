@@ -1,29 +1,26 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const useDeviceSize = () => {
-	const [width, setWidth] = useState(0);
-	const [height, setHeight] = useState(0);
-
-	const handleWindowResize = () => {
-		setWidth(window.innerWidth);
-		setHeight(window.innerHeight);
-	};
+	const [deviceSize, setDeviceSize] = useState({
+		width: undefined,
+		height: undefined,
+	});
 
 	useEffect(() => {
-		handleWindowResize;
+		function handleResize() {
+			setDeviceSize({
+				width: window.innerWidth,
+				height: window.innerHeight,
+			});
+		}
+		handleResize();
+		window.addEventListener('resize', handleResize);
+		return () => window.removeEventListener('resize', handleResize);
+	}, []); // Empty array ensures that effect is only run on mount
 
-		// window.addEventListener('load', handleWindowResize, false);
-		window.addEventListener('resize', handleWindowResize);
-
-		return () => {
-			// window.removeEventListener('load', handleWindowResize, false);
-			window.removeEventListener('resize', handleWindowResize);
-		};
-	}, []);
-
-	return [width, height];
+	return deviceSize;
 };
 
 export default useDeviceSize;

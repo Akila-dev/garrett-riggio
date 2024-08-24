@@ -38,7 +38,7 @@ export default function Home() {
 			x: e.clientX - 50,
 			y: e.clientY - 50,
 		});
-		console.log(mousePos);
+		// console.log(mousePos);
 	};
 
 	return (

@@ -93,7 +93,7 @@ export default function ZoomingCardsBG() {
 		const staggerScreen = (e) => {
 			setAnimateX((window.innerWidth / 4 - e.screenX) / 10);
 			setAnimateY((window.innerHeight / 4 - e.screenY) / 10);
-			console.log(e);
+			// console.log(e);
 		};
 
 		window.addEventListener('mousemove', staggerScreen);
