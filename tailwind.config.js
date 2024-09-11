@@ -16,8 +16,8 @@ module.exports = {
 				'13xl': '13rem',
 			},
 			animation: {
-				'horizontal-scroll': 'horizontal-scroll linear 16s infinite ',
-				'horizontal-scroll-2': 'horizontal-scroll-2 linear 16s infinite ',
+				'horizontal-scroll': 'horizontal-scroll linear 36s infinite ',
+				'horizontal-scroll-2': 'horizontal-scroll-2 linear 36s infinite ',
 			},
 			keyframes: {
 				'horizontal-scroll': {

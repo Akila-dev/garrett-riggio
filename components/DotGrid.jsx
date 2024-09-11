@@ -5,7 +5,7 @@ import anime from 'animejs';
 
 const WaterDropGrid = ({ w, h, id, largeDots }) => {
 	return (
-		<div className="absolute top-0 left-0 w-full h-full grid place-content-center">
+		<div className="absolute top-0 left-0 w-full h-full grid place-content-center overflow-hidden">
 			<DotGrid
 				width={w ? w : 25}
 				height={h ? h : 20}

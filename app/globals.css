@@ -18,7 +18,10 @@
 	background: radial-gradient(var(--neutral), var(--black) 80%);
 }
 .outline-text {
-	-webkit-text-stroke: 1px white;
+	-webkit-text-stroke: 1px var(--white);
+}
+.outline-text-black {
+	-webkit-text-stroke: 1px var(--black);
 }
 
 * {
@@ -30,7 +33,7 @@
 }
 
 body {
-	@apply h-full w-full bg-[--black] text-[--white] scroll-smooth;
+	@apply h-full w-full;
 }
 
 a {
@@ -84,7 +87,7 @@ h2 {
 }
 
 .blend-text {
-	@apply !bg-[--white] !bg-clip-text !text-transparent mix-blend-difference;
+	@apply bg-[--white] !bg-clip-text !text-transparent mix-blend-difference;
 }
 
 .blend-img img {
@@ -105,6 +108,10 @@ h2 {
 }
 .flow-text-4 {
 	@apply text-[10vw] lg:text-[4vw] font-light;
+}
+
+.logo-img img {
+	@apply !mix-blend-difference !bg-blend-difference;
 }
 
 .cover-overlay {

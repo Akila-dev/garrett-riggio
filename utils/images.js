@@ -24,7 +24,7 @@ import img22 from '../assets/imgs/22.jpeg';
 
 import garretWhite from '../assets/imgs/garret.png';
 import garretBlack from '../assets/imgs/garret-logo.png';
-import arrow from '../assets/imgs/arrow-b.png';
+import arrow from '../assets/imgs/arrow.png';
 
 import growthAward from '../assets/imgs/awards/growth-award.jpg';
 

@@ -15,7 +15,7 @@ import { FaArrowDown } from 'react-icons/fa6';
 
 import { variants, useDeviceSize, images } from '../utils';
 import { ScrambleText } from '../components';
-const coverVideoUrl = '/videos/cover.mp4';
+const coverVideoUrl = '/videos/intro.mp4';
 const textList = [
 	'Marketing Specialist',
 	'Sales Specialist',
@@ -40,27 +40,31 @@ const Cover = ({ scrollYProgress }) => {
 
 	// const { scrollY } = useScroll();
 
+	const clipProgress = useTransform(scrollYProgress, [0, 0.15], [0, 50]);
+	const springClipProgress = useSpring(clipProgress, { damping: 18 });
+	const clip = useMotionTemplate`outset( 0 ${clipProgress}% 0 ${clipProgress}% )`;
+
 	const translateTop = useTransform(
 		scrollYProgress,
-		[0, 0.25],
+		[0, 0.15],
 		[0, -height / 2]
 	);
 	const springTranslateTop = useSpring(translateTop, { damping: 18 });
 
 	const translateBottom = useTransform(
 		scrollYProgress,
-		[0, 0.25],
+		[0, 0.15],
 		[0, height / 2]
 	);
 	const springTranslateBottom = useSpring(translateBottom, { damping: 18 });
 
 	return (
-		<div className="w-full h-screen relative">
-			<video autoPlay muted loop className="w-full h-full object-cover">
+		<motion.div className="w-full h-full relative top-0">
+			<motion.video autoPlay muted loop className="w-full h-full object-cover">
 				<source src={coverVideoUrl} type="video/mp4" />
 				Your browser does not support the video tag.
-			</video>
-			<div className="w-full h-full absolute top-0 left-0 cover-overlay" />
+			</motion.video>
+			{/* <div className="w-full h-full absolute top-0 left-0 cover-overlay" /> */}
 			<motion.div
 				initial="initial"
 				animate="intro"
@@ -199,7 +203,7 @@ const Cover = ({ scrollYProgress }) => {
 					<div className="lg:w-[165px]"></div>
 				</motion.div>
 			</motion.div>
-		</div>
+		</motion.div>
 	);
 };
 

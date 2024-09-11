@@ -1,5 +1,6 @@
 import localFont from 'next/font/local';
 import './globals.css';
+import 'lenis/dist/lenis.css';
 
 import { Navbar } from '../components';
 
