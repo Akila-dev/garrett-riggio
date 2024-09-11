@@ -20,13 +20,13 @@ import { galleryList } from '../../utils/galleryData';
 export default function Home() {
 	const [loading, setLoading] = useState(true);
 
-	useEffect(() => {
-		setLoading(false);
-	}, []);
+	// useEffect(() => {
+	// 	setLoading(false);
+	// }, []);
 
 	return loading ? (
 		<div className="fixed top-0 w-full h-screen bg-[--black] text-[--white] z-[100000]">
-			Loading
+			Nothing to see here
 		</div>
 	) : (
 		<main className="w-full relative">
