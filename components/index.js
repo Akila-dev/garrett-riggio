@@ -7,6 +7,7 @@ export { default as Button } from './Button';
 export { default as LottieCard } from './LottieCard';
 
 export { default as ZoomingCardsBG } from './ZoomingCardsBG';
+export { default as ZoomingCardsBGPrev } from './ZoomingCardsBGPrev';
 
 export { default as CloseBtn } from './CloseBtn';
 export { default as Loader } from './Loader';

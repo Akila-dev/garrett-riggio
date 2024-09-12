@@ -2,12 +2,13 @@ import React from 'react';
 import Link from 'next/link';
 import { IoLocationOutline } from 'react-icons/io5';
 
-import { ZoomingCardsBG } from '../components';
+import { ZoomingCardsBG, ZoomingCardsBGPrev } from '../components';
 
 const Footer = () => {
 	return (
 		<main className="relative w-full h-screen">
-			<ZoomingCardsBG />
+			{/* <ZoomingCardsBG /> */}
+			<ZoomingCardsBGPrev />
 			<div className="absolute top-0 left-0 w-full h-full bg-black/50 flex-center">
 				<Link href="#" className="mb-[50px]">
 					<h1 className="text-white text-[20vw] lg:text-[10vw] !font-medium ">{`Let's Talk`}</h1>
@@ -45,7 +46,6 @@ const Footer = () => {
 							</p>
 						</div>
 					</div>
-					{/* <div className="grid grid-cols-1 lg:grid-cols-2 gap-5"> */}
 					<div className="flex flex-col gap-2">
 						<Link
 							href="#"
@@ -81,7 +81,6 @@ const Footer = () => {
 						</Link>
 					</div>
 				</div>
-				{/* </div> */}
 			</div>
 		</main>
 	);
