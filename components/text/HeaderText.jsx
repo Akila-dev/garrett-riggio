@@ -12,9 +12,9 @@ const HeaderText = ({ text, additionalClass, displacement }) => {
 		<motion.div
 			initial="initial"
 			whileInView="animate"
-			transition={{ staggerChildren: 0.02 }}
+			transition={{ staggerChildren: 0.05 }}
 			className={`flex flex-wrap w-full overflow-hidden ${
-				additionalClass && additionalClass
+				additionalClass ? additionalClass : 'gap-2'
 			}`}
 		>
 			{sentence.map((word, i) => (

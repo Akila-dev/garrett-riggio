@@ -12,8 +12,10 @@ const WavyText = ({ text, additionalClass }) => {
 		<motion.div
 			initial="initial"
 			whileInView="animate"
-			transition={{ staggerChildren: 0.08 }}
-			className={`flex flex-wrap w-full ${additionalClass && additionalClass}`}
+			transition={{ staggerChildren: 0.1 }}
+			className={`flex flex-wrap w-full ${
+				additionalClass ? additionalClass : 'gap-2'
+			}`}
 		>
 			{sentence.map((word, i) => (
 				<span key={i} className="flex">

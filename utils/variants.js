@@ -5,8 +5,8 @@ const BUTTON_VARIANT = {
 		scale: 1.1,
 		transition: {
 			type: 'spring',
-			duration: 1,
-			bounce: 0.2,
+			duration: 1.5,
+			bounce: 0.75,
 		},
 	},
 };
@@ -62,7 +62,7 @@ export const TEXT_VARIANT_4 = {
 
 		transition: {
 			type: 'spring',
-			duration: 0.75,
+			duration: 1,
 			bounce: 0.45,
 		},
 	}),

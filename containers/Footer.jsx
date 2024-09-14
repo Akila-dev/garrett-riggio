@@ -1,18 +1,36 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import { IoLocationOutline } from 'react-icons/io5';
+import { motion } from 'framer-motion';
 
-import { ZoomingCardsBG, ZoomingCardsBGPrev } from '../components';
+import {
+	ZoomingCardsBG,
+	WavyText,
+	HeaderText,
+	ClipHeightText,
+} from '../components';
+import { variants } from '@/utils';
 
 const Footer = () => {
 	return (
 		<main className="relative w-full h-screen">
 			{/* <ZoomingCardsBG /> */}
-			<ZoomingCardsBGPrev />
+			<ZoomingCardsBG />
 			<div className="absolute top-0 left-0 w-full h-full bg-black/50 flex-center">
-				<Link href="#" className="mb-[50px]">
-					<h1 className="text-white text-[20vw] lg:text-[10vw] !font-medium ">{`Let's Talk`}</h1>
-				</Link>
+				<motion.div
+					variants={variants.BUTTON_VARIANT}
+					whileTap="tap"
+					whileHover="hover"
+					className="cursor-pointer"
+				>
+					<Link href="#" className="mb-[50px]">
+						<div className="text-white text-[20vw] lg:text-[10vw] !font-medium ">
+							<WavyText text={`Let's Talk`} />
+						</div>
+					</Link>
+				</motion.div>
 			</div>
 			<div className="absolute bottom-0 left-0 w-full p-5 md:p-[3rem]">
 				<div className="grid grid-cols-2 md:grid-cols-4 gap-5">
@@ -20,30 +38,46 @@ const Footer = () => {
 						<div className="flex flex-col gap-2">
 							<Link
 								href="#"
-								className="flex items-center w-full gap-1 text-[14px] md:text-lg text-gray-200 font-thin underline md:no-underline underline-offset-[5px]"
+								className="flex items-center w-full gap-1 text-[14px] md:text-lg text-gray-200 font-thin underline md:no-underline underline-offset-[5px] overflow-hidden"
 							>
-								<IoLocationOutline /> Location 1
+								<motion.div
+									initial="initial"
+									animate="animate"
+									variants={variants.TEXT_VARIANT_4}
+									className="overflow-hidden"
+								>
+									<IoLocationOutline />
+								</motion.div>{' '}
+								<HeaderText text="Location 1" />
 							</Link>
-							<p className="hidden md:flex items-center w-full gap-1 text-[14px] md:text-lg text-gray-200 font-thin ">
-								Gran Vía de les Corts, 682 <br />
-							</p>
-							<p className="hidden md:flex items-center w-full gap-1 text-[14px] md:text-lg text-gray-200 font-thin">
-								08010
-							</p>
+							<div className="hidden md:flex items-center w-full gap-1 text-[14px] md:text-lg text-gray-200 font-thin ">
+								<ClipHeightText text="Gran Vía de les Corts, 682" />
+							</div>
+							<div className="hidden md:flex items-center w-full gap-1 text-[14px] md:text-lg text-gray-200 font-thin">
+								<ClipHeightText text="08010" />
+							</div>
 						</div>
 						<div className="flex flex-col gap-2">
 							<Link
 								href="#"
-								className="flex items-center w-full gap-1 text-[14px] md:text-lg text-gray-200 font-thin underline md:no-underline underline-offset-[5px]"
+								className="flex items-center w-full gap-1 text-[14px] md:text-lg text-gray-200 font-thin underline md:no-underline underline-offset-[5px] overflow-hidden"
 							>
-								<IoLocationOutline /> Location 2
+								<motion.div
+									initial="initial"
+									animate="animate"
+									variants={variants.TEXT_VARIANT_4}
+									className="overflow-hidden"
+								>
+									<IoLocationOutline />
+								</motion.div>
+								<HeaderText text="Location 2" />
 							</Link>
-							<p className="hidden md:flex items-center w-full gap-1 text-[14px] md:text-lg text-gray-200 font-thin">
-								Gran Vía de les Corts, 682
-							</p>
-							<p className="hidden md:flex items-center w-full gap-1 text-[14px] md:text-lg text-gray-200 font-thin">
-								08010
-							</p>
+							<div className="hidden md:flex items-center w-full gap-1 text-[14px] md:text-lg text-gray-200 font-thin">
+								<ClipHeightText text="Gran Vía de les Corts, 682" />
+							</div>
+							<div className="hidden md:flex items-center w-full gap-1 text-[14px] md:text-lg text-gray-200 font-thin">
+								<ClipHeightText text="08010" />
+							</div>
 						</div>
 					</div>
 					<div className="flex flex-col gap-2">
@@ -51,19 +85,19 @@ const Footer = () => {
 							href="#"
 							className="flex items-center w-full gap-1 text-[14px] md:text-lg text-gray-200 font-thin underline underline-offset-[5px]"
 						>
-							Instagram
+							<ClipHeightText text="Instagram" />
 						</Link>
 						<Link
 							href="#"
 							className="flex items-center w-full gap-1 text-[14px] md:text-lg text-gray-200 font-thin underline underline-offset-[5px]"
 						>
-							LinkedIn
+							<ClipHeightText text="LinkedIn" />
 						</Link>
 						<Link
 							href="#"
 							className="flex items-center w-full gap-1 text-[14px] md:text-lg text-gray-200 font-thin underline underline-offset-[5px]"
 						>
-							Twitter
+							<ClipHeightText text="Twitter" />
 						</Link>
 					</div>
 					<div className="flex flex-col gap-2">
@@ -71,13 +105,13 @@ const Footer = () => {
 							href="#"
 							className="hidden md:flex items-center w-full gap-1 text-[14px] md:text-lg text-gray-200 font-thin "
 						>
-							Business Inquiries
+							<HeaderText text="Business Inquiries" />
 						</Link>
 						<Link
 							href="#"
 							className="flex items-center w-full gap-1 text-[14px] md:text-lg text-gray-200 font-thin underline md:no-underline underline-offset-[5px]"
 						>
-							hello@mail.com
+							<ClipHeightText text="hello@mail.com" />
 						</Link>
 					</div>
 				</div>
