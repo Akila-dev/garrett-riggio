@@ -1,5 +1,5 @@
 'use client';
-import { useSate, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Footer } from '@/containers';
 
 export default function Home() {
