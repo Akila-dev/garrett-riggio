@@ -15,7 +15,7 @@ import { variants } from '@/utils';
 
 const Footer = () => {
 	return (
-		<main className="relative w-full h-screen">
+		<main className="relative w-full h-screen bg-black">
 			{/* <ZoomingCardsBG /> */}
 			<ZoomingCardsBG />
 			<div className="absolute top-0 left-0 w-full h-full bg-black/50 flex-center">

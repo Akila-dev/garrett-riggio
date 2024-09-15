@@ -47,6 +47,8 @@ export default function ZoomingCardsBG() {
 	const fill = [7, 0, 2, 6, 8, 1];
 	const [y, setY] = useState([]);
 	const [x, setX] = useState([]);
+	const pYPointsMax = ['30vh', '25vh', '20vh'];
+	const nYPointsMax = ['-30vh', '-25vh', '-20vh'];
 	const [fillers, setFillers] = useState(() => {
 		let res = [];
 		let rep = Math.ceil(galleryListFooter.length / fill.length);
@@ -54,14 +56,16 @@ export default function ZoomingCardsBG() {
 			for (let j = 0; j < fill.length; j++) {
 				setY((prev) => [
 					...prev,
-					fill[j] > 5 ? ['5vh', '20vh'] : ['-5vh', '-20vh'],
+					fill[j] > 5
+						? ['5vh', pYPointsMax[Math.floor(Math.random() * 3)]]
+						: ['-5vh', nYPointsMax[Math.floor(Math.random() * 3)]],
 				]);
 				setX((prev) => [
 					...prev,
 					[0, 6].includes(fill[j])
-						? ['-5vw', '-15vw']
+						? ['-5vw', '-25vw']
 						: [2, 8].includes(fill[j])
-						? ['5vw', '15vw']
+						? ['5vw', '25vw']
 						: ['0px', '0px'],
 				]);
 				res.push(fill[j]);
@@ -71,7 +75,7 @@ export default function ZoomingCardsBG() {
 	});
 
 	const scaleFromTo = [1, 2];
-	const zFromTo = ['-250px', '100px'];
+	const zFromTo = ['-150px', '50px'];
 
 	const footerVariants = {
 		initial: (i) => ({
@@ -94,6 +98,17 @@ export default function ZoomingCardsBG() {
 				duration: 10,
 				ease: 'easeIn',
 				repeat: Infinity,
+				repeatDelay: galleryListFooter.length - 10 / 1.125,
+			},
+		}),
+		card: (i) => ({
+			scale: [1, 1.35],
+			transition: {
+				type: 'tween',
+				delay: i * 1,
+				duration: 10,
+				ease: 'easeIn',
+				repeat: Infinity,
 				repeatDelay: galleryListFooter.length - 10 / 1.1,
 			},
 		}),
@@ -101,8 +116,8 @@ export default function ZoomingCardsBG() {
 
 	useEffect(() => {
 		const staggerScreen = (e) => {
-			setAnimateX((-window.innerWidth / 4 + e.screenX) / 12);
-			setAnimateY((-window.innerHeight / 4 + e.screenY) / 12);
+			setAnimateX((-window.innerWidth / 4 + e.screenX) / 15);
+			setAnimateY((-window.innerHeight / 4 + e.screenY) / 15);
 			// console.log(e);
 		};
 
@@ -151,7 +166,7 @@ export default function ZoomingCardsBG() {
 							// transition={{ staggerChildren: 1 }}
 							className="animated-cards w-full h-full flex items-center justify-center relative"
 							style={{
-								perspective: '100px',
+								perspective: '50px',
 								transformStyle: 'preserve-3d',
 								perspectiveOrigin: 'center center',
 							}}
@@ -174,6 +189,9 @@ export default function ZoomingCardsBG() {
 												/>
 											))}
 									<motion.div
+										animate="card"
+										variants={footerVariants}
+										custom={i}
 										// whileInView={{ scale: [0, 1] }}
 										className={`w-[50vh] h-[35vh] lg:w-[30vw] lg:h-[20vw] overflow-hidden col-span-1 row-span-1 translate-x-[-35%] lg:translate-x-[15%] scale-90 lg:scale-100 relative`}
 									>

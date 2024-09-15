@@ -13,6 +13,10 @@
 	--neutral: #585b53;
 }
 
+body {
+	@apply bg-black;
+}
+
 .cover-container {
 	@apply w-full h-screen;
 	background: radial-gradient(var(--neutral), var(--black) 80%);
