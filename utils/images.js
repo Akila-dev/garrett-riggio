@@ -1,5 +1,6 @@
+// IMAGES USED IN THE FOOTER ANIMATION
 // You can duplicate them, but try to make you you have at least 12 here
-export const galleryListFooter = [
+export const footerImages = [
 	'/footer_images/1.jpg',
 	'/footer_images/2.jpg',
 	'/footer_images/3.png',
@@ -22,4 +23,24 @@ export const galleryListFooter = [
 	'/footer_images/10.png',
 	'/footer_images/11.png',
 	'/footer_images/12.jpg',
+];
+
+// IMAGES USED IN THE HERO ANIMATION
+export const heroImages = [
+	'/footer_images/1.jpg',
+	'/footer_images/2.jpg',
+	'/footer_images/3.png',
+	'/footer_images/4.jpg',
+	'/footer_images/5.jpg',
+	'/footer_images/6.png',
+	'/footer_images/7.jpg',
+	'/footer_images/8.jpg',
+	'/footer_images/9.png',
+	'/footer_images/10.png',
+	'/footer_images/11.png',
+	'/footer_images/12.jpg',
+	'/footer_images/3.png',
+	'/footer_images/4.jpg',
+	'/footer_images/5.jpg',
+	'/footer_images/6.png',
 ];

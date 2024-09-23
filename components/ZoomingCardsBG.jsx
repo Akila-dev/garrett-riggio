@@ -13,9 +13,6 @@ import {
 	stagger,
 } from 'framer-motion';
 
-// import { SmoothScroll } from '../wrappers';
-import { images } from '../utils';
-import { galleryListFooter } from '../utils/galleryData'; // This is just a list of the images that would be used
 const RectangleCard = ({ src }) => {
 	return (
 		<motion.div className="w-full h-full relative">
@@ -30,7 +27,7 @@ const RectangleCard = ({ src }) => {
 	);
 };
 
-export default function ZoomingCardsBG() {
+export default function ZoomingCardsBG({ footerImages }) {
 	const [initSpeed, setInitSpeed] = useState(true);
 	const [animateX, setAnimateX] = useState(0);
 	const [animateY, setAnimateY] = useState(0);
@@ -51,7 +48,7 @@ export default function ZoomingCardsBG() {
 	const nYPointsMax = ['-30vh', '-25vh', '-20vh'];
 	const [fillers, setFillers] = useState(() => {
 		let res = [];
-		let rep = Math.ceil(galleryListFooter.length / fill.length);
+		let rep = Math.ceil(footerImages.length / fill.length);
 		for (let i = 0; i < rep; i++) {
 			for (let j = 0; j < fill.length; j++) {
 				setY((prev) => [
@@ -98,7 +95,7 @@ export default function ZoomingCardsBG() {
 				duration: 10,
 				ease: 'easeIn',
 				repeat: Infinity,
-				repeatDelay: galleryListFooter.length - 10 / 1.125,
+				repeatDelay: footerImages.length - 10 / 1.125,
 			},
 		}),
 		card: (i) => ({
@@ -109,7 +106,7 @@ export default function ZoomingCardsBG() {
 				duration: 10,
 				ease: 'easeIn',
 				repeat: Infinity,
-				repeatDelay: galleryListFooter.length - 10 / 1.1,
+				repeatDelay: footerImages.length - 10 / 1.1,
 			},
 		}),
 	};
@@ -171,7 +168,7 @@ export default function ZoomingCardsBG() {
 								perspectiveOrigin: 'center center',
 							}}
 						>
-							{galleryListFooter.map((src, i) => (
+							{footerImages.map((src, i) => (
 								<motion.div
 									key={i}
 									variants={footerVariants}
@@ -203,7 +200,7 @@ export default function ZoomingCardsBG() {
 												delay: i,
 												duration: 10,
 												repeat: Infinity,
-												repeatDelay: galleryListFooter.length - 10,
+												repeatDelay: footerImages.length - 10,
 											}}
 											className="absolute w-full h-full bg-black top-0"
 										/> */}

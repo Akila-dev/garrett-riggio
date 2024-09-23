@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react';
 
 const useDeviceSize = () => {
 	const [deviceSize, setDeviceSize] = useState({
-		width: undefined,
-		height: undefined,
+		width: window.innerWidth,
+		height: window.innerHeight,
 	});
 
 	useEffect(() => {

@@ -13,11 +13,11 @@ import {
 } from '../components';
 import { variants } from '@/utils';
 
-const Footer = () => {
+const Footer = ({ footerImages }) => {
 	return (
 		<main className="relative w-full h-screen bg-black">
 			{/* <ZoomingCardsBG /> */}
-			<ZoomingCardsBG />
+			<ZoomingCardsBG footerImages={footerImages} />
 			<div className="absolute top-0 left-0 w-full h-full bg-black/50 flex-center">
 				<motion.div
 					variants={variants.BUTTON_VARIANT}
