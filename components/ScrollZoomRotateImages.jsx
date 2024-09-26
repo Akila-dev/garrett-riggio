@@ -14,10 +14,27 @@ import {
 	OrbitControls,
 } from '@react-three/drei';
 
-const ImageCard = ({ src, pos, scrollYProgress, size, i, scale, initX }) => {
+const ImageCard = ({
+	src,
+	pos,
+	scrollYProgress,
+	size,
+	i,
+	scale,
+	initX,
+	screenSize,
+}) => {
 	const ref = useRef();
-	const x = useTransform(scrollYProgress, [0, 0.1], [initX, pos[0]]);
-	const y = useTransform(scrollYProgress, [0, 0.1], [1 - i / 10, pos[1]]);
+	const x = useTransform(
+		scrollYProgress,
+		[0, 0.1],
+		[initX, screenSize.width > screenSize.height ? pos[0] : pos[0] / 1.75]
+	);
+	const y = useTransform(
+		scrollYProgress,
+		[0, 0.1],
+		[1 - i / 10, screenSize.width > screenSize.height ? pos[1] : pos[1] * 1.1]
+	);
 	const z = useTransform(scrollYProgress, [0, 0.1], [-i * 2, pos[2]]);
 	const rotate = useTransform(scrollYProgress, [0, 0.1], [0.75, -0.5]);
 	const scaleP = useTransform(scrollYProgress, [0, 0.1], scale);
@@ -41,7 +58,7 @@ const ImageCard = ({ src, pos, scrollYProgress, size, i, scale, initX }) => {
 	);
 };
 
-const Sphere = ({ imgs, count = 4, radius = 2, containerRef }) => {
+const Sphere = ({ imgs, count = 4, radius = 2, containerRef, screenSize }) => {
 	const { scrollYProgress } = useScroll({
 		container: containerRef,
 		offset: ['start start', 'end end'],
@@ -131,13 +148,14 @@ const Sphere = ({ imgs, count = 4, radius = 2, containerRef }) => {
 					scale={scale[i]}
 					size={size}
 					initX={initX[i]}
+					screenSize={screenSize}
 				/>
 			))}
 		</motion.group>
 	);
 };
 
-const ScrollZoomRotateImages = ({ heroImages, containerRef }) => {
+const ScrollZoomRotateImages = ({ heroImages, containerRef, screenSize }) => {
 	return (
 		<div className="w-full h-screen absolute top-0 left-0">
 			<Canvas dpr={[1, 2]} camera={{ position: [0, 0, 12.5], fov: 45 }}>
@@ -145,7 +163,7 @@ const ScrollZoomRotateImages = ({ heroImages, containerRef }) => {
 				<fog attach="fog" args={['#202025', 0, 1]} />
 				<Suspense fallback={null}>
 					<motion.group>
-						<Sphere imgs={heroImages} />
+						<Sphere imgs={heroImages} screenSize={screenSize} />
 						{/* <ImageCard src={heroImages[0]} /> */}
 					</motion.group>
 				</Suspense>
