@@ -15,7 +15,7 @@ import {
 import { SmoothScroll } from '@/wrappers';
 import { variants, useDeviceSize, scrollVideos } from '@/utils';
 
-const Hero = ({ heroImages }) => {
+const Hero = ({ heroImages, scrollVideos }) => {
 	const containerRef = useRef(null);
 	const vidContainerRef = useRef(null);
 	const { scrollYProgress } = useScroll({
@@ -39,25 +39,28 @@ const Hero = ({ heroImages }) => {
 		return () => window.removeEventListener('resize', handleResize);
 	}, []);
 
+	// NOTE: THE HEIGHT OF CONTAINERREF IS THE HEIGHT THAT BOTH SCROLLZOOMROTATEIMAGES AND SCROLLZOOM TAKE. SCROLLZOOMROTATEIMAGES TAKES 1/10 OF THE FULL HEIGHT AND SCROLLZOOM TAKES THE REMAINING HEIGHT. YOU CAN CHOOSE TO INCREASE OR DECREASE THE HEIGHT HOWEVER YOU PLEASE.
+
 	return (
 		<SmoothScroll>
-			<div ref={containerRef} className="h-[250vh]">
-				<div className="sticky top-0 h-screen">
-					<div className="w-full bg-black">
+			<div ref={containerRef} className="h-[1250vh]">
+				<div className="sticky top-0 h-screen bg-blue-80">
+					<div className="w-full bg-blac h-full">
 						<ScrollZoomRotateImages
 							scrollYProgress={scrollYProgress}
 							heroImages={heroImages}
 							screenSize={deviceSize}
 							containerRef={containerRef}
 						/>
+						{/* <ScrollZoom
+							scrollYProgress={scrollYProgress}
+							scrollVideos={scrollVideos}
+							screenSize={deviceSize}
+							containerRef={containerRef}
+						/> */}
 					</div>
 				</div>
 			</div>
-			{/* <div ref={vidContainerRef} className="h-[400vh]">
-				<div className="sticky top-0 h-screen bg-transparent">
-					<ScrollZoom />
-				</div>
-			</div> */}
 		</SmoothScroll>
 	);
 };

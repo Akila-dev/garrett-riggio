@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { Hero, Footer } from '@/containers';
-import { footerImages, heroImages } from '@/utils'; // This is just a list of the images that would be used
+import { footerImages, heroImages, scrollVideos } from '@/utils'; // This is just a list of the images that would be used
 
 export default function Home() {
 	const [isLoading, setIsLoading] = useState(true);
@@ -18,7 +18,7 @@ export default function Home() {
 				</div>
 			) : (
 				<>
-					<Hero heroImages={heroImages} />
+					<Hero heroImages={heroImages} scrollVideos={scrollVideos} />
 					{/* <Footer footerImages={footerImages} /> */}
 				</>
 			)}

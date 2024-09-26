@@ -1,13 +1,63 @@
 // VIDEOS USED AFTER THE HERO ANIMATION
 export const scrollVideos = [
-	'/videos/2.mp4',
-	'/videos/4.mp4',
-	'/videos/5.mp4',
-	'/videos/6.mp4',
-	'/videos/10.mp4',
-	'/videos/2.mp4',
-	'/videos/4.mp4',
-	'/videos/5.mp4',
-	'/videos/6.mp4',
-	'/videos/10.mp4',
+	{
+		video: '/videos/2.mp4',
+		title: 'Don Chandelier',
+		desc: 'Emoticon',
+		link: '#',
+	},
+	{
+		video: '/videos/4.mp4',
+		title: 'Don Chandelier',
+		desc: 'Emoticon',
+		link: '#',
+	},
+	{
+		video: '/videos/5.mp4',
+		title: 'Don Chandelier',
+		desc: 'Emoticon',
+		link: '#',
+	},
+	{
+		video: '/videos/6.mp4',
+		title: 'Don Chandelier',
+		desc: 'Emoticon',
+		link: '#',
+	},
+	{
+		video: '/videos/10.mp4',
+		title: 'Don Chandelier',
+		desc: 'Emoticon',
+		link: '#',
+	},
+	{
+		video: '/videos/2.mp4',
+		title: 'Don Chandelier',
+		desc: 'Emoticon',
+		link: '#',
+	},
+	{
+		video: '/videos/4.mp4',
+		title: 'Don Chandelier',
+		desc: 'Emoticon',
+		link: '#',
+	},
+	{
+		video: '/videos/5.mp4',
+		title: 'Don Chandelier',
+		desc: 'Emoticon',
+		link: '#',
+	},
+	{
+		video: '/videos/6.mp4',
+		title: 'Don Chandelier',
+		desc: 'Emoticon',
+		link: '#',
+	},
+	{
+		video: '/videos/10.mp4',
+		title: 'Don Chandelier',
+		desc: 'Emoticon',
+		link: '#',
+	},
 ];

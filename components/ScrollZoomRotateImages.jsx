@@ -1,175 +1,155 @@
+/* eslint-disable jsx-a11y/alt-text */
 'use client';
 
-import { useRef, useState, useEffect } from 'react';
-import Image from 'next/image';
+import * as THREE from 'three';
+import { useRef, useState, useMemo, useEffect, Suspense } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { useTransform, useScroll, useMotionValueEvent } from 'framer-motion';
+import { motion } from 'framer-motion-3d';
 import {
-	motion,
-	useTransform,
-	useSpring,
-	useScroll,
-	useMotionTemplate,
-	useMotionValue,
-	useAnimate,
-	stagger,
-} from 'framer-motion';
-import { ScrollZoomRotateImagesCard } from '@/components';
+	Billboard,
+	Text,
+	TrackballControls,
+	Image,
+	OrbitControls,
+} from '@react-three/drei';
 
-const ScrollZoomRotateImages = ({
-	container,
-	scrollYProgress,
-	heroImages,
-	screenSize,
-}) => {
-	const padding = screenSize.width / 3;
-	const len = heroImages.length;
-	const factor = screenSize.width - padding * 2;
-	const right = screenSize.width + padding;
+const ImageCard = ({ src, pos, scrollYProgress, size, i, scale, initX }) => {
+	const ref = useRef();
+	const x = useTransform(scrollYProgress, [0, 0.1], [initX, pos[0]]);
+	const y = useTransform(scrollYProgress, [0, 0.1], [1 - i / 10, pos[1]]);
+	const z = useTransform(scrollYProgress, [0, 0.1], [-i * 2, pos[2]]);
+	const rotate = useTransform(scrollYProgress, [0, 0.1], [0.75, -0.5]);
+	const scaleP = useTransform(scrollYProgress, [0, 0.1], scale);
 
 	return (
-		<div className="text-white h-[100vh] overflow-hidden relative">
-			<motion.div
-				style={{
-					perspective: '100px',
-					transformStyle: 'preserve-3d',
-					perspectiveOrigin: 'center center',
-				}}
-				className="w-full h-screen relative top-0"
-			>
-				{/* LEFT */}
-				<ScrollZoomRotateImagesCard
-					img={heroImages[0]}
-					screenSize={screenSize}
-					x={[-padding / 2, 0]}
-					y={[0, screenSize.height / 8]}
-					z={[-80, 100]}
-					rotation={[-0.8, -0]}
+		<motion.mesh
+			scale={scaleP}
+			position-x={x}
+			position-y={y}
+			position-z={z}
+			rotation-x={rotate}
+		>
+			<Image
+				ref={ref}
+				url={src}
+				scale={size}
+				// rotation={[0, 1, 0]}
+				side={THREE.DoubleSide}
+			/>
+		</motion.mesh>
+	);
+};
+
+const Sphere = ({ imgs, count = 4, radius = 2, containerRef }) => {
+	const { scrollYProgress } = useScroll({
+		container: containerRef,
+		offset: ['start start', 'end end'],
+		layoutEffect: false,
+	});
+
+	const yProg = useTransform(scrollYProgress, [0, 0.1], [-8, 0]);
+	const zProg = useTransform(scrollYProgress, [0, 0.1], [0, 2]);
+
+	const rotation = useTransform(scrollYProgress, [0, 0.1], [-0.5, 0.5]);
+
+	const initX = [
+		0, -0.1, 0.1, -0.2, 0.2, -0.3, 0.3, 0.4, -0.4, 0.5, 0.6, -0.5, 0.7, 0.8,
+		-0.6, -0.7,
+	];
+
+	const positions = [
+		[0, 4, 15],
+		[7, 4, 15],
+		[-8, 3, 13],
+		[-7, 7, 20],
+		[12, 4, 10],
+		[-15, 4, 10],
+		[10, 3, 10],
+		[3, 1, 12],
+		[-5, 2, 11],
+		[5, 2, 11],
+		[3, 3, 10],
+		[-3, 3.5, 11],
+		[8, 5, 11],
+		[4, 6, 12],
+		[-6, 6, 12],
+		[-0.4, 4.65, 10],
+	];
+	const scale = [
+		[0.15, 0.25],
+		[0.15, 0.35],
+		[0.2, 0.35],
+		[0.2, 0.35],
+		[0.35, 0.35],
+		[0.45, 0.35],
+		[0.45, 0.25],
+		[0.5, 0.25],
+		[0.6, 0.2],
+		[0.6, 0.2],
+		[0.6, 0.2],
+		[0.6, 0.2],
+		[0.7, 0.1],
+		[0.7, 0.1],
+		[0.7, 0.1],
+		[0.8, 0.1],
+	];
+
+	// const positions = [
+	// 	[0, 5, 20],
+	// 	[-7, 5, 19],
+	// 	[7, 5, 19],
+	// 	[5, 4, 18],
+	// 	[-5, 4, 16],
+	// 	[7, 8, 15],
+	// 	[8, 8, 14],
+	// 	[-8, 8, 13],
+	// 	[-7, 6, 12],
+	// 	[5, 6, 11],
+	// 	[-5, 6, 10],
+	// 	[6, 3, 9],
+	// 	[-6, 8, 8],
+	// 	[3, 8, 7],
+	// 	[-4, 4, 6],
+	// 	[4, 4, 5],
+	// ];
+
+	return (
+		<motion.group position-y={yProg} rotation-x={rotation} position-z={zProg}>
+			{/* <motion.group position-y={yProg}> */}
+			{/* <motion.group> */}
+			{/* <ImageCard src={imgs[0]} pos={[0, 0, 0]} scale={0.35} /> */}
+
+			{imgs.map(({ img, size }, i) => (
+				<ImageCard
+					key={i}
+					src={img}
+					pos={positions[i]}
+					// scale={0.35}
+					scrollYProgress={scrollYProgress}
+					i={i}
+					scale={scale[i]}
+					size={size}
+					initX={initX[i]}
 				/>
-				<ScrollZoomRotateImagesCard
-					img={heroImages[1]}
-					screenSize={screenSize}
-					x={[-padding / 2, padding * 1.2]}
-					y={[-screenSize.height / 15, screenSize.height / 2]}
-					z={[-90, 100]}
-					rotation={[-0.8, -0]}
-				/>
-				<ScrollZoomRotateImagesCard
-					img={heroImages[2]}
-					screenSize={screenSize}
-					x={[-padding / 1.25, padding / 2]}
-					y={[0, -screenSize.height / 5]}
-					z={[-100, 100]}
-					rotation={[-0.8, -0]}
-				/>
-				<ScrollZoomRotateImagesCard
-					img={heroImages[3]}
-					screenSize={screenSize}
-					x={[-padding / 2, padding]}
-					y={[0, -screenSize.height / 4]}
-					z={[-110, 100]}
-					rotation={[-0.8, -0]}
-				/>
-				{/* ML */}
-				<ScrollZoomRotateImagesCard
-					img={heroImages[0]}
-					screenSize={screenSize}
-					x={[padding, padding * 1.25]}
-					y={[0, screenSize.height / 3]}
-					z={[-80, 100]}
-					rotation={[-0.8, -0]}
-				/>
-				<ScrollZoomRotateImagesCard
-					img={heroImages[1]}
-					screenSize={screenSize}
-					x={[padding / 4, padding]}
-					y={[-screenSize.height / 15, -screenSize.height / 2]}
-					z={[-110, 100]}
-					rotation={[-0.8, -0]}
-				/>
-				<ScrollZoomRotateImagesCard
-					img={heroImages[2]}
-					screenSize={screenSize}
-					x={[padding / 1.25, padding]}
-					y={[0, -screenSize.height / 5]}
-					z={[-100, 100]}
-					rotation={[-0.8, -0]}
-					makeSmaller
-				/>
-				<ScrollZoomRotateImagesCard
-					img={heroImages[3]}
-					screenSize={screenSize}
-					x={[padding / 8, padding]}
-					y={[0, screenSize.height / 10]}
-					z={[-110, 100]}
-					rotation={[-0.8, -0]}
-				/>
-				{/* MR */}
-				<ScrollZoomRotateImagesCard
-					img={heroImages[12]}
-					screenSize={screenSize}
-					x={[screenSize.width / 2, right / 2]}
-					y={[0, screenSize.height / 16]}
-					z={[-90, 100]}
-					rotation={[-0.8, -0]}
-					makeSmaller
-				/>
-				<ScrollZoomRotateImagesCard
-					img={heroImages[13]}
-					screenSize={screenSize}
-					x={[right / 4, right / 2]}
-					y={[0, -screenSize.height / 2]}
-					z={[-100, 100]}
-					rotation={[-0.8, -0]}
-				/>
-				<ScrollZoomRotateImagesCard
-					img={heroImages[14]}
-					screenSize={screenSize}
-					x={[right / 3, right / 2.5]}
-					y={[0, -screenSize.height / 6]}
-					z={[-110, 100]}
-					rotation={[-0.8, -0]}
-				/>
-				<ScrollZoomRotateImagesCard
-					img={heroImages[15]}
-					screenSize={screenSize}
-					x={[right / 4, right / 3]}
-					y={[0, -screenSize.height / 4]}
-					z={[-120, 100]}
-					rotation={[-0.8, -0]}
-				/>
-				{/* RIGHT */}
-				<ScrollZoomRotateImagesCard
-					img={heroImages[12]}
-					screenSize={screenSize}
-					x={[screenSize.width, right / 2]}
-					y={[0, screenSize.height / 8]}
-					z={[-80, 100]}
-					rotation={[-0.8, -0]}
-				/>
-				<ScrollZoomRotateImagesCard
-					img={heroImages[13]}
-					screenSize={screenSize}
-					x={[right / 1.75, right / 2]}
-					y={[-screenSize.height / 15, screenSize.height / 2]}
-					z={[-110, 100]}
-					rotation={[-0.8, -0]}
-				/>
-				<ScrollZoomRotateImagesCard
-					img={heroImages[14]}
-					screenSize={screenSize}
-					x={[right / 1.25, right / 2]}
-					y={[0, -screenSize.height / 5]}
-					z={[-120, 100]}
-					rotation={[-0.8, -0]}
-				/>
-				<ScrollZoomRotateImagesCard
-					img={heroImages[15]}
-					screenSize={screenSize}
-					x={[right / 1.5, right / 2]}
-					y={[0, -screenSize.height / 4]}
-					z={[-140, 100]}
-					rotation={[-0.8, -0]}
-				/>
-			</motion.div>
+			))}
+		</motion.group>
+	);
+};
+
+const ScrollZoomRotateImages = ({ heroImages, containerRef }) => {
+	return (
+		<div className="w-full h-screen absolute top-0 left-0">
+			<Canvas dpr={[1, 2]} camera={{ position: [0, 0, 12.5], fov: 45 }}>
+				{/* <OrbitControls /> */}
+				<fog attach="fog" args={['#202025', 0, 1]} />
+				<Suspense fallback={null}>
+					<motion.group>
+						<Sphere imgs={heroImages} />
+						{/* <ImageCard src={heroImages[0]} /> */}
+					</motion.group>
+				</Suspense>
+			</Canvas>
 		</div>
 	);
 };
