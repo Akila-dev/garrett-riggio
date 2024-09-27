@@ -42,5 +42,4 @@ export const heroImages = [
 	{ img: '/footer_images/3.png', size: [2.5, 3] },
 	{ img: '/footer_images/4.jpg', size: [2.5, 3] },
 	{ img: '/footer_images/5.jpg', size: [3, 2.5] },
-	{ img: '/footer_images/6.png', size: [2.5, 3] },
 ];

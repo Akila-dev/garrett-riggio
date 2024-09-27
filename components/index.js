@@ -1,6 +1,7 @@
 export { default as ZoomingCardsBG } from './ZoomingCardsBG';
 export { default as ScrollZoomRotateImages } from './ScrollZoomRotateImages';
-export { default as ScrollZoomRotateImagesCard } from './ScrollZoomRotateImagesCard';
+export { default as ScrollZoomCard } from './ScrollZoomCard';
+export { default as ScrollZoomCardBG } from './ScrollZoomCardBG';
 export { default as ScrollZoom } from './ScrollZoom';
 
 // Text

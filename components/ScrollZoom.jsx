@@ -2,9 +2,22 @@
 
 import { useRef, useState, useEffect } from 'react';
 
-import { useTransform, useScroll, useMotionValueEvent } from 'framer-motion';
+import {
+	useTransform,
+	useScroll,
+	useMotionValueEvent,
+	motion,
+	AnimatePresence,
+} from 'framer-motion';
+import { ScrollZoomCard, ScrollZoomCardBG } from '@/components';
 
-const ScrollZoom = ({ scrollVideos, containerRef }) => {
+const ScrollZoom = ({
+	screenSize,
+	scrollVideos,
+	containerRef,
+	scrollYProgress,
+}) => {
+	const [activeVid, setActiveVid] = useState(-1);
 	const [len, setLen] = useState(scrollVideos.length);
 	const [scrollPoints, setScrollPoints] = useState(
 		Array.from(
@@ -13,16 +26,57 @@ const ScrollZoom = ({ scrollVideos, containerRef }) => {
 		)
 	);
 
-	useEffect(() => {
-		// const interval = setInterval(() => {
-		// 	console.log(containerRef);
-		// }, 500);
-		// setPoints();
-	}, []);
-
 	return (
 		<div className="text-white w-full h-screen">
-			<p className="!text-white">ScrollZoom</p>
+			<div
+				style={{
+					perspective: '100px',
+					transformStyle: 'preserve-3d',
+					perspectiveOrigin: 'center center',
+				}}
+				className="w-full h-full overflow-hidden relative flex-center"
+			>
+				{/* BG */}
+				{scrollVideos.map((vid, i) => (
+					<ScrollZoomCardBG
+						key={i}
+						opacityStart={scrollPoints[i] + 0.9 / (len + 1) / 2}
+						opacityEnd={scrollPoints[i] + (0.9 / (len + 1)) * 0.4}
+						firstOpacityStart={scrollPoints[i] + (0.9 / (len + 1)) * 0}
+						firstOpacityEnd={scrollPoints[i] + (0.9 / (len + 1)) * 1}
+						start={scrollPoints[i]}
+						mid={scrollPoints[i] + (0.9 / (len + 1)) * 2}
+						end={scrollPoints[i] + (0.9 / (len + 1)) * 3}
+						i={i}
+						vid={vid}
+						screenSize={screenSize}
+						activeVid={activeVid}
+						setActiveVid={setActiveVid}
+						len={len}
+					/>
+				))}
+
+				{/* CARDS */}
+				{scrollVideos.map((vid, i) => (
+					<ScrollZoomCard
+						key={i}
+						// containerRef={containerRef}
+						start={scrollPoints[i]}
+						// end={i === scrollVideos.length - 1 ? 1 : scrollPoints[i + 3]}
+						firstEnd={scrollPoints[i] + (0.9 / (len + 1)) * 1.5}
+						mid={scrollPoints[i] + (0.9 / (len + 1)) * 1}
+						bgEnd={scrollPoints[i] + (0.9 / (len + 1)) * 0.5}
+						end={scrollPoints[i] + (0.9 / (len + 1)) * 3}
+						i={i}
+						vid={vid}
+						screenSize={screenSize}
+						activeVid={activeVid}
+						setActiveVid={setActiveVid}
+						len={len}
+						// scrollYProgress={scrollYProgress}
+					/>
+				))}
+			</div>
 		</div>
 	);
 };
