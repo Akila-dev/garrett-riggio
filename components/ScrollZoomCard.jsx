@@ -28,7 +28,7 @@ const ScrollZoomCard = ({
 }) => {
 	const { scrollYProgress } = useScroll({
 		container: containerRef,
-		offset: ['start start', 'end end'],
+		// offset: ['start start', 'end end'],
 	});
 
 	const opacity = useTransform(scrollYProgress, [start, mid], [0, 1]);
@@ -47,7 +47,7 @@ const ScrollZoomCard = ({
 	const scale = useTransform(
 		scrollYProgress,
 		[start, end],
-		screenSize.width > screenSize.height ? [1, 1.3] : [2, 5]
+		screenSize.width > screenSize.height ? [1, 1.3] : [2, 3]
 	);
 	const scaleVid = useTransform(scrollYProgress, [start, end], [0.8, 1.5]);
 
@@ -81,7 +81,7 @@ const ScrollZoomCard = ({
 				{i % 2 > 0 && <div />}
 				<Link
 					href={vid.link}
-					className="flex flex-col items-center justify-center gap-[2vh] lg:gap-[5vh] h-ful w-ful overflow-hidden"
+					className="flex flex-col items-center justify-center gap-[2vh] lg:gap-[5vh] h-ful w-ful overflow-hidden scale-70 lg:scale-100"
 				>
 					<div className="text-white text-center text-[3.2vw] leading-[120%]">
 						<div className="">{vid.title}</div>
