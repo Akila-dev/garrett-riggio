@@ -12,8 +12,6 @@ import {
 	TrackballControls,
 	Image,
 	OrbitControls,
-	Plane,
-	RoundedBox,
 } from '@react-three/drei';
 
 const ImageCard = ({
@@ -26,7 +24,6 @@ const ImageCard = ({
 	initX,
 	screenSize,
 }) => {
-	const [imageOpacity, setImageOpacity] = useState(0.7);
 	const ref = useRef();
 	const x = useTransform(
 		scrollYProgress,
@@ -41,11 +38,6 @@ const ImageCard = ({
 	const z = useTransform(scrollYProgress, [0, 0.1], [-i * 2, pos[2]]);
 	const rotate = useTransform(scrollYProgress, [0, 0.1], [0.75, -0.5]);
 	const scaleP = useTransform(scrollYProgress, [0, 0.1], scale);
-	const opacity = useTransform(scrollYProgress, [0, 0.1], [0.5, 0.9]);
-
-	useMotionValueEvent(opacity, 'change', (latest) => {
-		setImageOpacity(latest);
-	});
 
 	return (
 		<motion.mesh
@@ -61,18 +53,7 @@ const ImageCard = ({
 				scale={size}
 				// rotation={[0, 1, 0]}
 				side={THREE.DoubleSide}
-				// transparent
-				// opacity={imageOpacity}
-				// zoom={imageOpacity}
 			/>
-			{/* <mesh > */}
-			{/* <Image
-				url={'/bg-b.jpg'}
-				scale={size}
-				side={THREE.DoubleSide}
-				position={[0, 0, -0.1]}
-			/> */}
-			{/* </mesh> */}
 		</motion.mesh>
 	);
 };
@@ -113,21 +94,22 @@ const Sphere = ({ imgs, count = 4, radius = 2, containerRef, screenSize }) => {
 		[-0.4, 4.65, 10],
 	];
 	const scale = [
-		[0.25, 0.25],
-		[0.25, 0.35],
-		[0.3, 0.35],
-		[0.5, 0.35],
-		[0.65, 0.35],
-		[0.75, 0.35],
-		[0.75, 0.25],
-		[0.8, 0.25],
-		[0.9, 0.2],
-		[0.9, 0.2],
-		[0.9, 0.2],
-		[1, 0.2],
-		[1, 0.1],
-		[1, 0.1],
-		[1, 0.1],
+		[0.15, 0.25],
+		[0.15, 0.35],
+		[0.2, 0.35],
+		[0.2, 0.35],
+		[0.35, 0.35],
+		[0.45, 0.35],
+		[0.45, 0.25],
+		[0.5, 0.25],
+		[0.6, 0.2],
+		[0.6, 0.2],
+		[0.6, 0.2],
+		[0.6, 0.2],
+		[0.7, 0.1],
+		[0.7, 0.1],
+		[0.7, 0.1],
+		[0.8, 0.1],
 	];
 
 	// const positions = [
@@ -148,24 +130,9 @@ const Sphere = ({ imgs, count = 4, radius = 2, containerRef, screenSize }) => {
 	// 	[-4, 4, 6],
 	// 	[4, 4, 5],
 	// ];
-	const [imageOpacity, setImageOpacity] = useState(0);
-
-	const opacity = useTransform(scrollYProgress, [0, 0.08], [0.5, 0]);
-
-	useMotionValueEvent(opacity, 'change', (latest) => {
-		setImageOpacity(latest);
-	});
 
 	return (
 		<motion.group position-y={yProg} rotation-x={rotation} position-z={zProg}>
-			<Image
-				url={'bg-b.jpg'}
-				scale={[100, 100]}
-				side={THREE.DoubleSide}
-				transparent
-				position={[-10, 0, 10]}
-				opacity={imageOpacity}
-			/>
 			{/* <motion.group position-y={yProg}> */}
 			{/* <motion.group> */}
 			{/* <ImageCard src={imgs[0]} pos={[0, 0, 0]} scale={0.35} /> */}
@@ -193,7 +160,7 @@ const ScrollZoomRotateImages = ({ heroImages, containerRef, screenSize }) => {
 		<div className="w-full h-screen absolute top-0 left-0">
 			<Canvas dpr={[1, 2]} camera={{ position: [0, 0, 12.5], fov: 45 }}>
 				{/* <OrbitControls /> */}
-				{/* <fog attach="fog" args={['#c82a2a', 0, 12.5]} /> */}
+				<fog attach="fog" args={['#202025', 0, 1]} />
 				<Suspense fallback={null}>
 					<motion.group>
 						<Sphere imgs={heroImages} screenSize={screenSize} />

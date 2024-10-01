@@ -41,11 +41,13 @@ const ScrollZoom = ({
 					<ScrollZoomCardBG
 						key={i}
 						opacityStart={scrollPoints[i] + 0.9 / (len + 1) / 2}
-						opacityEnd={scrollPoints[i] + (0.9 / (len + 1)) * 0.4}
 						firstOpacityStart={scrollPoints[i] + (0.9 / (len + 1)) * 0}
-						firstOpacityEnd={scrollPoints[i] + (0.9 / (len + 1)) * 1}
+						firstOpacityEnd={scrollPoints[i] + (0.9 / (len + 1)) * 0.5}
 						start={scrollPoints[i]}
-						mid={scrollPoints[i] + (0.9 / (len + 1)) * 2}
+						mid={scrollPoints[i] + (0.9 / (len + 1)) * 1.7}
+						opacityEnd={scrollPoints[i] + (0.9 / (len + 1)) * 2}
+						exitStart={scrollPoints[i + 1] + (0.9 / (len + 1)) * 1.7}
+						exitEnd={scrollPoints[i + 1] + (0.9 / (len + 1)) * 2}
 						end={scrollPoints[i] + (0.9 / (len + 1)) * 3}
 						i={i}
 						vid={vid}

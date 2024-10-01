@@ -30,8 +30,6 @@ const ScrollZoomCardBG = ({
 	activeVid,
 	setActiveVid,
 	len,
-	exitStart,
-	exitEnd,
 	// scrollYProgress,
 }) => {
 	const [showBg, setShowBg] = useState(false);
@@ -40,15 +38,11 @@ const ScrollZoomCardBG = ({
 		offset: ['start start', 'end end'],
 	});
 
-	const opacity = useTransform(
-		scrollYProgress,
-		[mid, opacityEnd, exitStart, exitEnd],
-		[0, 1, 1, 0]
-	);
+	const opacity = useTransform(scrollYProgress, [start, opacityEnd], [0, 1]);
 	const opacity0 = useTransform(
 		scrollYProgress,
-		[firstOpacityStart, firstOpacityEnd, exitStart, exitEnd],
-		[0, 1, 1, 0]
+		[firstOpacityStart, firstOpacityEnd],
+		[0, 1]
 	);
 	const z = useTransform(scrollYProgress, [start, end], [-i, i]);
 	const zIndex = useTransform(scrollYProgress, [start, mid], [-i * 10, i]);
@@ -61,15 +55,13 @@ const ScrollZoomCardBG = ({
 
 	return (
 		<motion.div
-			transition={{ type: 'tween', ease: 'easeIn' }}
 			initial={{ zIndex: -i, opacity: 0 }}
 			style={{
-				zIndex: zIndex,
+				zIndex: i === 1 ? zIndex0 : zIndex,
 				opacity: i === 0 ? opacity0 : opacity,
 			}}
 			key={i}
 			className="absolute w-full h-screen blur-3xl"
-			layout
 		>
 			<motion.video
 				width={750}
