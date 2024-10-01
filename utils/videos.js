@@ -68,6 +68,6 @@ export const scrollVideos = [
 		title: 'Don Chandelier',
 		desc: 'Emoticon',
 		link: '#',
-		type: 'square',
+		type: 'portrait',
 	},
 ];

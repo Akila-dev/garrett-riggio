@@ -32,24 +32,32 @@ const ScrollZoomCard = ({
 	});
 
 	const opacity = useTransform(scrollYProgress, [start, mid], [0, 1]);
-	const z = useTransform(scrollYProgress, [start, end], [-750, 100]);
+	const z = useTransform(
+		scrollYProgress,
+		[start, end],
+		screenSize.width > screenSize.height ? [-750, 200] : [-750, 100]
+	);
 	const x = useTransform(
 		scrollYProgress,
 		[start, end],
 		screenSize.width > screenSize.height
 			? [0, i % 2 > 0 ? screenSize.width / 8 : -screenSize.width / 8]
-			: [0, i % 2 > 0 ? screenSize.width / 14 : -screenSize.width / 14]
+			: [0, i % 2 > 0 ? 1 : -1]
 	);
 	const scale = useTransform(
 		scrollYProgress,
 		[start, end],
-		screenSize.width > screenSize.height ? [1, 1] : [3, 5]
+		screenSize.width > screenSize.height ? [1, 1.3] : [2, 5]
 	);
 	const scaleVid = useTransform(scrollYProgress, [start, end], [0.8, 1.5]);
 
 	// FOR FIRST ANIMATION
 	const opacity2 = useTransform(scrollYProgress, [mid, firstEnd], [0, 1]);
-	const z2 = useTransform(scrollYProgress, [start, end], [-350, 100]);
+	const z2 = useTransform(
+		scrollYProgress,
+		[start, end],
+		screenSize.width > screenSize.height ? [-350, 100] : [-850, 100]
+	);
 	const scale2 = useTransform(
 		scrollYProgress,
 		[start, end],
@@ -68,7 +76,7 @@ const ScrollZoomCard = ({
 					zIndex: len * 2 - i,
 					// rotateY: i % 2 > 0 ? 2 : -2,
 				}}
-				className="absolute top-0 left-0 w-full h-screen object-contain grid grid-cols-2 gap-[5vw]"
+				className="absolute top-0 left-0 w-full h-screen object-contain grid grid-cols-2"
 			>
 				{i % 2 > 0 && <div />}
 				<Link

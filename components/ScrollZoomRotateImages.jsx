@@ -31,12 +31,12 @@ const ImageCard = ({
 	const x = useTransform(
 		scrollYProgress,
 		[0, 0.1],
-		[initX, screenSize.width > screenSize.height ? pos[0] : pos[0] / 1.75]
+		[initX, screenSize.width > screenSize.height ? pos[0] : pos[0] / 1.25]
 	);
 	const y = useTransform(
 		scrollYProgress,
 		[0, 0.1],
-		[1 - i / 10, screenSize.width > screenSize.height ? pos[1] : pos[1] * 1.1]
+		[1 - i / 10, screenSize.width > screenSize.height ? pos[1] : pos[1] * 1.25]
 	);
 	const z = useTransform(scrollYProgress, [0, 0.1], [-i * 2, pos[2]]);
 	const rotate = useTransform(scrollYProgress, [0, 0.1], [0.75, -0.5]);
@@ -84,10 +84,18 @@ const Sphere = ({ imgs, count = 4, radius = 2, containerRef, screenSize }) => {
 		layoutEffect: false,
 	});
 
-	const yProg = useTransform(scrollYProgress, [0, 0.1], [-8, 0]);
+	const yProg = useTransform(
+		scrollYProgress,
+		[0, 0.1],
+		screenSize.width >= 740 ? [-8, 0] : [-8, 2]
+	);
 	const zProg = useTransform(scrollYProgress, [0, 0.1], [0, 2]);
 
-	const rotation = useTransform(scrollYProgress, [0, 0.1], [-0.5, 0.5]);
+	const rotation = useTransform(
+		scrollYProgress,
+		[0, 0.1],
+		screenSize.width >= 740 ? [-0.5, 0.5] : [-0.7, 0.7]
+	);
 
 	const initX = [
 		0, -0.1, 0.1, -0.2, 0.2, -0.3, 0.3, 0.4, -0.4, 0.5, 0.6, -0.5, 0.7, 0.8,
@@ -130,24 +138,6 @@ const Sphere = ({ imgs, count = 4, radius = 2, containerRef, screenSize }) => {
 		[1, 0.1],
 	];
 
-	// const positions = [
-	// 	[0, 5, 20],
-	// 	[-7, 5, 19],
-	// 	[7, 5, 19],
-	// 	[5, 4, 18],
-	// 	[-5, 4, 16],
-	// 	[7, 8, 15],
-	// 	[8, 8, 14],
-	// 	[-8, 8, 13],
-	// 	[-7, 6, 12],
-	// 	[5, 6, 11],
-	// 	[-5, 6, 10],
-	// 	[6, 3, 9],
-	// 	[-6, 8, 8],
-	// 	[3, 8, 7],
-	// 	[-4, 4, 6],
-	// 	[4, 4, 5],
-	// ];
 	const [imageOpacity, setImageOpacity] = useState(0);
 
 	const opacity = useTransform(scrollYProgress, [0, 0.08], [0.5, 0]);
@@ -157,7 +147,12 @@ const Sphere = ({ imgs, count = 4, radius = 2, containerRef, screenSize }) => {
 	});
 
 	return (
-		<motion.group position-y={yProg} rotation-x={rotation} position-z={zProg}>
+		<motion.group
+			scale={screenSize.width >= 740 ? 1 : 0.7}
+			position-y={yProg}
+			rotation-x={rotation}
+			position-z={zProg}
+		>
 			<Image
 				url={'bg-b.jpg'}
 				scale={[100, 100]}
