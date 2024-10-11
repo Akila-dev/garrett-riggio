@@ -27,7 +27,6 @@ const ImageCard = ({
 	screenSize,
 }) => {
 	const [imageOpacity, setImageOpacity] = useState(0.7);
-	const ref = useRef();
 	const x = useTransform(
 		scrollYProgress,
 		[0, 0.1],
@@ -41,11 +40,6 @@ const ImageCard = ({
 	const z = useTransform(scrollYProgress, [0, 0.1], [-i * 2, pos[2]]);
 	const rotate = useTransform(scrollYProgress, [0, 0.1], [0.75, -0.5]);
 	const scaleP = useTransform(scrollYProgress, [0, 0.1], scale);
-	const opacity = useTransform(scrollYProgress, [0, 0.1], [0.5, 0.9]);
-
-	useMotionValueEvent(opacity, 'change', (latest) => {
-		setImageOpacity(latest);
-	});
 
 	return (
 		<motion.mesh
@@ -55,35 +49,18 @@ const ImageCard = ({
 			position-z={z}
 			rotation-x={rotate}
 		>
-			<Image
-				ref={ref}
-				url={src}
-				scale={size}
-				// rotation={[0, 1, 0]}
-				side={THREE.DoubleSide}
-				// transparent
-				// opacity={imageOpacity}
-				// zoom={imageOpacity}
-			/>
-			{/* <mesh > */}
-			{/* <Image
-				url={'/bg-b.jpg'}
-				scale={size}
-				side={THREE.DoubleSide}
-				position={[0, 0, -0.1]}
-			/> */}
-			{/* </mesh> */}
+			<Image url={src} scale={size} side={THREE.DoubleSide} />
 		</motion.mesh>
 	);
 };
 
-const Sphere = ({ imgs, count = 4, radius = 2, containerRef, screenSize }) => {
-	const { scrollYProgress } = useScroll({
-		container: containerRef,
-		offset: ['start start', 'end end'],
-		layoutEffect: false,
-	});
-
+const Sphere = ({
+	imgs,
+	count = 4,
+	radius = 2,
+	screenSize,
+	scrollYProgress,
+}) => {
 	const yProg = useTransform(
 		scrollYProgress,
 		[0, 0.1],
@@ -161,9 +138,6 @@ const Sphere = ({ imgs, count = 4, radius = 2, containerRef, screenSize }) => {
 				position={[-10, 0, 10]}
 				opacity={imageOpacity}
 			/>
-			{/* <motion.group position-y={yProg}> */}
-			{/* <motion.group> */}
-			{/* <ImageCard src={imgs[0]} pos={[0, 0, 0]} scale={0.35} /> */}
 
 			{imgs.map(({ img, size }, i) => (
 				<ImageCard
@@ -183,16 +157,21 @@ const Sphere = ({ imgs, count = 4, radius = 2, containerRef, screenSize }) => {
 	);
 };
 
-const ScrollZoomRotateImages = ({ heroImages, containerRef, screenSize }) => {
+const ScrollZoomRotateImages = ({
+	heroImages,
+	screenSize,
+	scrollYProgress,
+}) => {
 	return (
 		<div className="w-full h-screen absolute top-0 left-0">
 			<Canvas dpr={[1, 2]} camera={{ position: [0, 0, 12.5], fov: 45 }}>
-				{/* <OrbitControls /> */}
-				{/* <fog attach="fog" args={['#c82a2a', 0, 12.5]} /> */}
 				<Suspense fallback={null}>
 					<motion.group>
-						<Sphere imgs={heroImages} screenSize={screenSize} />
-						{/* <ImageCard src={heroImages[0]} /> */}
+						<Sphere
+							imgs={heroImages}
+							screenSize={screenSize}
+							scrollYProgress={scrollYProgress}
+						/>
 					</motion.group>
 				</Suspense>
 			</Canvas>

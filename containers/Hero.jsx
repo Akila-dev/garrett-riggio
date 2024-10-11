@@ -17,13 +17,6 @@ import { variants, useDeviceSize, scrollVideos } from '@/utils';
 
 const Hero = ({ heroImages, scrollVideos }) => {
 	const containerRef = useRef(null);
-	const parallaxRef = useRef(null);
-	const vidContainerRef = useRef(null);
-	const { scrollYProgress } = useScroll({
-		container: containerRef,
-		offset: ['start start', 'end end'],
-		layoutEffect: false,
-	});
 	const [deviceSize, setDeviceSize] = useState({
 		width: window.innerWidth,
 		height: window.innerHeight,
@@ -41,11 +34,11 @@ const Hero = ({ heroImages, scrollVideos }) => {
 		return () => window.removeEventListener('resize', handleResize);
 	}, []);
 
-	const height = useTransform(
-		scrollYProgress,
-		[0, 0.1],
-		[deviceSize.height, 0]
-	);
+	const { scrollYProgress } = useScroll({
+		target: containerRef,
+		offset: ['start start', 'end end'],
+		layoutEffect: false,
+	});
 
 	// NOTE: THE HEIGHT OF CONTAINERREF IS THE HEIGHT THAT BOTH SCROLLZOOMROTATEIMAGES AND SCROLLZOOM TAKE. SCROLLZOOMROTATEIMAGES TAKES 1/10 OF THE FULL HEIGHT AND SCROLLZOOM TAKES THE REMAINING HEIGHT. YOU CAN CHOOSE TO INCREASE OR DECREASE THE HEIGHT HOWEVER YOU PLEASE.
 
@@ -55,17 +48,15 @@ const Hero = ({ heroImages, scrollVideos }) => {
 				<div className="sticky top-0 h-screen">
 					<div className="w-full bg-blac h-full">
 						<ScrollZoomRotateImages
-							scrollYProgress={scrollYProgress}
 							heroImages={heroImages}
 							screenSize={deviceSize}
-							containerRef={containerRef}
+							scrollYProgress={scrollYProgress}
 						/>
 
 						<ScrollZoom
-							scrollYProgress={scrollYProgress}
 							scrollVideos={scrollVideos}
 							screenSize={deviceSize}
-							containerRef={containerRef}
+							scrollYProgress={scrollYProgress}
 						/>
 					</div>
 				</div>

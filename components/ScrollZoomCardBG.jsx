@@ -32,13 +32,9 @@ const ScrollZoomCardBG = ({
 	len,
 	exitStart,
 	exitEnd,
-	// scrollYProgress,
+	scrollYProgress,
 }) => {
 	const [showBg, setShowBg] = useState(false);
-	const { scrollYProgress } = useScroll({
-		container: containerRef,
-		offset: ['start start', 'end end'],
-	});
 
 	const opacity = useTransform(
 		scrollYProgress,

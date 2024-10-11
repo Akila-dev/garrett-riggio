@@ -25,12 +25,8 @@ const ScrollZoomCard = ({
 	vid,
 	screenSize,
 	len,
+	scrollYProgress,
 }) => {
-	const { scrollYProgress } = useScroll({
-		container: containerRef,
-		// offset: ['start start', 'end end'],
-	});
-
 	const opacity = useTransform(scrollYProgress, [start, mid], [0, 1]);
 	const z = useTransform(
 		scrollYProgress,
@@ -74,7 +70,6 @@ const ScrollZoomCard = ({
 					x: x,
 					scale: i === 0 ? scale2 : scale,
 					zIndex: len * 2 - i,
-					// rotateY: i % 2 > 0 ? 2 : -2,
 				}}
 				className="absolute top-0 left-0 w-full h-screen object-contain grid grid-cols-2"
 			>

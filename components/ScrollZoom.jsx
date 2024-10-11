@@ -11,12 +11,7 @@ import {
 } from 'framer-motion';
 import { ScrollZoomCard, ScrollZoomCardBG } from '@/components';
 
-const ScrollZoom = ({
-	screenSize,
-	scrollVideos,
-	containerRef,
-	scrollYProgress,
-}) => {
+const ScrollZoom = ({ screenSize, scrollVideos, scrollYProgress }) => {
 	const [activeVid, setActiveVid] = useState(-1);
 	const [len, setLen] = useState(scrollVideos.length);
 	const [scrollPoints, setScrollPoints] = useState(
@@ -40,14 +35,14 @@ const ScrollZoom = ({
 				{scrollVideos.map((vid, i) => (
 					<ScrollZoomCardBG
 						key={i}
-						opacityStart={scrollPoints[i] + 0.9 / (len + 1) / 2}
-						firstOpacityStart={scrollPoints[i] + (0.9 / (len + 1)) * 0}
-						firstOpacityEnd={scrollPoints[i] + (0.9 / (len + 1)) * 0.5}
+						opacityStart={scrollPoints[i] + 0.9 / (len + 1) / 2} // scrollpoint for initiating opacity of new background
+						firstOpacityStart={scrollPoints[i] + (0.9 / (len + 1)) * 0} // scrollpoint for initiating opacity of new background for the first item
+						firstOpacityEnd={scrollPoints[i] + (0.9 / (len + 1)) * 0.5} // scrollpoint for full opacity of new background for the first item
+						opacityEnd={scrollPoints[i] + (0.9 / (len + 1)) * 2} // scrollpoint for initiating opacity of new background
+						exitStart={scrollPoints[i + 1] + (0.9 / (len + 1)) * 1.7} // scrollpoint for initiating transparency of current backround for new background to be displayed
+						exitEnd={scrollPoints[i + 1] + (0.9 / (len + 1)) * 2} // scrollpoint for transparency=0 of current backround for new background to be displayed
 						start={scrollPoints[i]}
 						mid={scrollPoints[i] + (0.9 / (len + 1)) * 1.7}
-						opacityEnd={scrollPoints[i] + (0.9 / (len + 1)) * 2}
-						exitStart={scrollPoints[i + 1] + (0.9 / (len + 1)) * 1.7}
-						exitEnd={scrollPoints[i + 1] + (0.9 / (len + 1)) * 2}
 						end={scrollPoints[i] + (0.9 / (len + 1)) * 3}
 						i={i}
 						vid={vid}
@@ -55,6 +50,7 @@ const ScrollZoom = ({
 						activeVid={activeVid}
 						setActiveVid={setActiveVid}
 						len={len}
+						scrollYProgress={scrollYProgress}
 					/>
 				))}
 
@@ -62,12 +58,9 @@ const ScrollZoom = ({
 				{scrollVideos.map((vid, i) => (
 					<ScrollZoomCard
 						key={i}
-						// containerRef={containerRef}
 						start={scrollPoints[i]}
-						// end={i === scrollVideos.length - 1 ? 1 : scrollPoints[i + 3]}
-						firstEnd={scrollPoints[i] + (0.9 / (len + 1)) * 1.5}
+						firstEnd={scrollPoints[i] + (0.9 / (len + 1)) * 1.5} // scroll point for full opacity of the first element
 						mid={scrollPoints[i] + (0.9 / (len + 1)) * 1}
-						bgEnd={scrollPoints[i] + (0.9 / (len + 1)) * 0.5}
 						end={scrollPoints[i] + (0.9 / (len + 1)) * 3.2}
 						i={i}
 						vid={vid}
@@ -75,7 +68,7 @@ const ScrollZoom = ({
 						activeVid={activeVid}
 						setActiveVid={setActiveVid}
 						len={len}
-						// scrollYProgress={scrollYProgress}
+						scrollYProgress={scrollYProgress}
 					/>
 				))}
 			</div>
